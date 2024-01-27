@@ -10,7 +10,7 @@
             <i class="fas fa-list m-1"></i>Tüm Tekneler
         </a>
         <!-- DataTales Example -->
-        <form action="{{route('admin.tekne-olustur-kaydet')}}" method="POST" id="storeForm" enctype="multipart/form-data">
+        <form id="storeForm" enctype="multipart/form-data">
             @csrf
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -143,7 +143,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success">Gönder</button>
+            <button type="submit" class="btn btn-success" id="storeYachtButton">Gönder</button>
 
         </form>
     </div>

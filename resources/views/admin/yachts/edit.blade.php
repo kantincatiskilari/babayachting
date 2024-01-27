@@ -10,7 +10,7 @@
             <i class="fas fa-list m-1"></i>Tüm Tekneler
         </a>
         <!-- DataTales Example -->
-        <form action="{{ route('admin.tekne-guncelle-kaydet',['id' => $yacht->id]) }}" method="POST" id="storeForm" enctype="multipart/form-data">
+        <form id="updateForm" enctype="multipart/form-data">
             @csrf
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -34,7 +34,7 @@
                                 <select name="trading_status" class="form-select">
                                     <option value="1" {{ $yacht->trading_status == 1 ? 'selected' : '' }}>Satılık
                                     </option>
-                                    <option value="2" {{ $yacht->trading_status == 0 ? 'selected' : '' }}>Kiralık
+                                    <option value="2" {{ $yacht->trading_status == 2 ? 'selected' : '' }}>Kiralık
                                     </option>
                                 </select>
                             </div>
@@ -68,14 +68,16 @@
                 <div class="card-body">
                     <div class="form-group">
                         <div class="mb-3">Seçili Banner Resmi:</div>
-                        <img src="{{ asset('images/custom-images/' . $yacht->banner_image) }}" alt="" style="width: 350px; height:180px; object-fit:cover">
+                        <img src="{{ asset('images/custom-images/' . $yacht->banner_image) }}" alt=""
+                            style="width: 350px; height:180px; object-fit:cover">
                         <label class="mt-3" style="display: block">Banner Resmi <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" name="banner_image">
                         <hr>
                     </div>
                     <div class="form-group">
                         <div class="mb-3">Seçili Kapak Resmi:</div>
-                        <img src="{{ asset('images/custom-images/' . $yacht->thumbnail_image) }}" alt="" style="width: 350px; height:180px; object-fit:cover">
+                        <img src="{{ asset('images/custom-images/' . $yacht->thumbnail_image) }}" alt=""
+                            style="width: 350px; height:180px; object-fit:cover">
                         <label class="mt-3" style="display: block">Kapak Resmi <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" name="thumbnail_image">
                         <hr>
@@ -83,9 +85,11 @@
                     <div class="form-group">
                         <div class="mb-3">Seçili Slider Resimleri:</div>
                         @foreach ($yacht->yachtImages as $image)
-                            <img class="my-2" src="{{ asset('images/custom-images/' . $image->image) }}" alt="" style="width: 350px; height:180px; object-fit:cover">
+                            <img class="my-2" src="{{ asset('images/custom-images/' . $image->image) }}" alt=""
+                                style="width: 350px; height:180px; object-fit:cover; display:block">
                         @endforeach
-                        <label class="mt-3" style="display: block">Slider Resimleri(Çoklu) <span class="text-danger">*</span></label>
+                        <label class="mt-3" style="display: block">Slider Resimleri(Çoklu) <span
+                                class="text-danger">*</span></label>
                         <input type="file" multiple class="form-control" name="slider_images[]">
                     </div>
                 </div>
@@ -99,7 +103,6 @@
                         <div>
                             <input value="{{ $system->id }}" type="checkbox" name="electronic_systems[]"
                                 {{ $yacht->electronicSystems->contains('system_id', $system->id) ? 'checked' : '' }}>
-
                             <label class="mx-1" for="alarm">{{ $system->electronic_name }}</label>
                         </div>
                     @endforeach
@@ -160,7 +163,8 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success">Gönder</button>
+            <input type="hidden" id="yachtId" value="{{ $yacht->id }}">
+            <button type="submit" class="btn btn-success" id="updateYachtButton">Gönder</button>
 
         </form>
     </div>

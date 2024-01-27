@@ -7,12 +7,11 @@ $(document).ready(function () {
 
 //Store
 
-
 $(document).ready(function () {
     $("#storeTypeButton").click(function (e) {
         var formData = {
-            'type_name': $('input[name="type_name"]').val(),
-            'status': $('select[name="status"]').val()
+            type_name: $('input[name="type_name"]').val(),
+            status: $('select[name="status"]').val(),
         };
 
         // updateType fonksiyonunu çağır
@@ -28,8 +27,7 @@ $(document).ready(function () {
             headers: {
                 "X-CSRF-TOKEN": csrfToken,
             },
-            data: formData
-            ,
+            data: formData,
             success: function (response) {
                 toastr.success(response.success);
 
@@ -43,8 +41,8 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#storeSpecificationButton").click(function (e) {
         var formData = {
-            'specification_name': $('input[name="specification_name"]').val(),
-            'status': $('select[name="status"]').val()
+            specification_name: $('input[name="specification_name"]').val(),
+            status: $('select[name="status"]').val(),
         };
 
         // updateType fonksiyonunu çağır
@@ -60,8 +58,7 @@ $(document).ready(function () {
             headers: {
                 "X-CSRF-TOKEN": csrfToken,
             },
-            data: formData
-            ,
+            data: formData,
             success: function (response) {
                 toastr.success(response.success);
 
@@ -75,8 +72,8 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#storeElectronicButton").click(function (e) {
         var formData = {
-            'electronic_name': $('input[name="electronic_name"]').val(),
-            'status': $('select[name="status"]').val()
+            electronic_name: $('input[name="electronic_name"]').val(),
+            status: $('select[name="status"]').val(),
         };
 
         // updateType fonksiyonunu çağır
@@ -92,8 +89,7 @@ $(document).ready(function () {
             headers: {
                 "X-CSRF-TOKEN": csrfToken,
             },
-            data: formData
-            ,
+            data: formData,
             success: function (response) {
                 toastr.success(response.success);
 
@@ -105,37 +101,49 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $("#storeTypeButton").click(function (e) {
-        var formData = {
-            'type_name': $('input[name="type_name"]').val(),
-            'status': $('select[name="status"]').val()
-        };
+    $("#storeYachtButton").click(function (e) {
+        e.preventDefault();
 
-        // updateType fonksiyonunu çağır
-        storeType(formData);
+        // Form verilerini al
+        var formData = new FormData($("#storeForm")[0]);
+
+        // CKEditor'ın içeriğini al
+        var descriptionContent = CKEDITOR.instances.description.getData();
+
+        // CKEditor içeriğini form verilerine ekle
+        formData.append("description", descriptionContent);
+
+        // Formu AJAX ile gönder
+        storeYacht(formData);
     });
 
-    function storeType(formData) {
+    function storeYacht(formData) {
         var csrfToken = $('meta[name="csrf-token"]').attr("content");
 
         $.ajax({
-            url: "/admin/tip-olustur",
+            url: "tekne-olustur/kaydet",
             method: "POST",
             headers: {
                 "X-CSRF-TOKEN": csrfToken,
             },
-            data: formData
-            ,
+            processData: false,  // FormData nesnesini işleme tabi tutma
+            contentType: false,  // Content-Type başlığını elle belirtme
+            data: formData,
             success: function (response) {
                 toastr.success(response.success);
 
-                location.reload();
+                // Sunucu tarafında yapılan yönlendirme işlemi
+                if (response.redirect) {
+                    window.location.href = response.redirect;
+                }
             },
-            error: function () {},
+            error: function (error) {
+                toastr.error("Bir hata oluştu.");
+                console.error(error);
+            },
         });
     }
 });
-
 
 
 //Update Status
@@ -329,51 +337,138 @@ $(document).ready(function () {
     }
 });
 
+//Yacht
+
+$(document).ready(function () {
+    $("#updateYachtButton").click(function (e) {
+        e.preventDefault();
+
+        // Form içindeki #yachtId öğesinin değerini al
+        var yachtId = $("#updateForm #yachtId").val();
+        var formData = $("#updateForm").serialize();
+
+        // updateYacht fonksiyonunu çağır
+        updateYacht(yachtId, formData);
+    });
+
+    function updateYacht(yachtId, formData) {
+        var csrfToken = $('meta[name="csrf-token"]').attr("content");
+
+        $.ajax({
+            url: "/admin/tekne-guncelle/kaydet/" + yachtId,
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": csrfToken,
+            },
+            data: formData,
+            success: function (response) {
+                toastr.success(response.success);
+
+                // Sunucu tarafında yapılan yönlendirme işlemi
+                if (response.redirect) {
+                    window.location.href = response.redirect;
+                }
+            },
+            error: function (error) {
+                toastr.error("Bir hata oluştu.");
+                console.error(error);
+            },
+        });
+    }
+});
+
+//Profil
+$(document).ready(function () {
+    $("#updateProfileButton").click(function (e) {
+        e.preventDefault();
+
+        // Form içindeki #profileForm öğesinin değerini al
+        var formData = new FormData($("#profileForm")[0]);
+
+        // updateProfile fonksiyonunu çağır
+        updateProfile(formData);
+    });
+
+    function updateProfile(formData) {
+        var csrfToken = $('meta[name="csrf-token"]').attr("content");
+
+        $.ajax({
+            url: "/admin/profil-guncelle",
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": csrfToken,
+            },
+            processData: false, // Veriyi işleme
+            contentType: false, // İçerik tipini belirleme
+            data: formData,
+            success: function (response) {
+                toastr.success(response.success);
+
+                // Sunucu tarafında yapılan yönlendirme işlemi
+                if (response.redirect) {
+                    window.location.href = response.redirect;
+                }
+            },
+            error: function (error) {
+                toastr.error("Bir hata oluştu.");
+                console.error(error);
+            },
+        });
+    }
+});
+
+
+//Delete
 $(document).ready(function () {
     var csrfToken = $('meta[name="csrf-token"]').attr("content");
 
     function bindDeleteEvent(selector, url) {
-        $(selector).unbind().click(function () {
-            var itemId = $(this).data("delete-id");
-            Swal.fire({
-                title: "Silmek istediğinize emin misiniz?",
-                showDenyButton: false,
-                showCancelButton: true,
-                confirmButtonText: "Sil",
-                denyButtonText: `Vazgeç`,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: url + itemId,
-                        method: "DELETE",
-                        headers: {
-                            "X-CSRF-TOKEN": csrfToken,
-                        },
-                        success: function (response) {
-                            toastr.success(response.success);
-                            location.reload();
-                        },
-                        error: function (response) {
-                            toastr.error(response.responseJSON.error);
-                        },
-                    });
-                }
+        $(selector)
+            .unbind()
+            .click(function () {
+                var itemId = $(this).data("delete-id");
+                Swal.fire({
+                    title: "Silmek istediğinize emin misiniz?",
+                    showDenyButton: false,
+                    showCancelButton: true,
+                    confirmButtonText: "Sil",
+                    denyButtonText: `Vazgeç`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: url + itemId,
+                            method: "DELETE",
+                            headers: {
+                                "X-CSRF-TOKEN": csrfToken,
+                            },
+                            success: function (response) {
+                                toastr.success(response.success);
+                                location.reload();
+                            },
+                            error: function (response) {
+                                toastr.error(response.responseJSON.error);
+                            },
+                        });
+                    }
+                });
             });
-        });
     }
 
     // DataTable'ın draw.dt olayını dinle
     $("#dataTable").on("draw.dt", function () {
         // Silme butonlarına olayı tanımla
         bindDeleteEvent(".deleteTypeBtn", "/admin/tip-sil/");
-        bindDeleteEvent(".deleteSpecificationBtn", "/admin/teknik-ozellik-sil/");
+        bindDeleteEvent(
+            ".deleteSpecificationBtn",
+            "/admin/teknik-ozellik-sil/"
+        );
         bindDeleteEvent(".deleteElectronicBtn", "/admin/elektronik-sil/");
         bindDeleteEvent(".deleteYachtBtn", "/admin/tekne-sil/");
     });
 
     // İlk yükleme için silme butonlarına olayı tanımla
     bindDeleteEvent(".deleteTypeBtn", "/admin/tip-sil/");
-        bindDeleteEvent(".deleteSpecificationBtn", "/admin/teknik-ozellik-sil/");
-        bindDeleteEvent(".deleteElectronicBtn", "/admin/elektronik-sil/");
-        bindDeleteEvent(".deleteYachtBtn", "/admin/tekne-sil/");
+    bindDeleteEvent(".deleteSpecificationBtn", "/admin/teknik-ozellik-sil/");
+    bindDeleteEvent(".deleteElectronicBtn", "/admin/elektronik-sil/");
+    bindDeleteEvent(".deleteYachtBtn", "/admin/tekne-sil/");
 });
