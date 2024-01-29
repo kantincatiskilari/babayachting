@@ -182,172 +182,180 @@ class YachtController extends Controller
         return response()->json(['success' => 'Yat başarıyla eklendi.', 'redirect' => route('admin.tekneler')]);
     }
 
-        public function update($id)
-        {
-            $yacht = Yacht::find($id);
-            $yachtTypes = YachtTypes::all();
-            $electronicSystems = ElectronicSystems::all();
-            $specifications = TechnicalSpecification::all();
-            return view('admin.yachts.edit', compact('yacht', 'yachtTypes', 'electronicSystems', 'specifications'));
-        }
+    public function update($id)
+    {
+        $yacht = Yacht::find($id);
+        $yachtTypes = YachtTypes::all();
+        $electronicSystems = ElectronicSystems::all();
+        $specifications = TechnicalSpecification::all();
+        return view('admin.yachts.edit', compact('yacht', 'yachtTypes', 'electronicSystems', 'specifications'));
+    }
 
-        public function edit(Request $request, $id)
-        {
-            $yacht = Yacht::find($id);
+    public function edit(Request $request, $id)
+    {
+        $yacht = Yacht::find($id);
 
-            $rules = [
-                'title' => 'required',
-                'yacht_type_id' => 'required',
-                'country' => 'required',
-                'price' => 'required|numeric',
-                'trading_status' => 'required',
-                'description' => 'required',
-                'is_recommended' => 'required',
-            ];
+        $rules = [
+            'title' => 'required',
+            'yacht_type_id' => 'required',
+            'country' => 'required',
+            'price' => 'required|numeric',
+            'trading_status' => 'required',
+            'description' => 'required',
+            'is_recommended' => 'required',
+        ];
 
-            $customMessages = [
-                'title.required' => 'Bir başlık giriniz.',
-                'yacht_type_id.required' => 'Tekne tipini belirleyiniz.',
-                'country.required' => 'Teknenin hangi ülkede olduğunu belirtiniz.',
-                'price.required' => 'Teknenin fiyatı boş olamaz.',
-                'description.required' => 'Açıklama alanı boş bırakılamaz.',
-                'is_recommended.required' => 'Önerilen alanı boş bırakılamaz.',
-            ];
+        $customMessages = [
+            'title.required' => 'Bir başlık giriniz.',
+            'yacht_type_id.required' => 'Tekne tipini belirleyiniz.',
+            'country.required' => 'Teknenin hangi ülkede olduğunu belirtiniz.',
+            'price.required' => 'Teknenin fiyatı boş olamaz.',
+            'description.required' => 'Açıklama alanı boş bırakılamaz.',
+            'is_recommended.required' => 'Önerilen alanı boş bırakılamaz.',
+        ];
 
-            $this->validate($request, $rules, $customMessages);
+        $this->validate($request, $rules, $customMessages);
 
-            $yacht->title = $request->title;
-            $yacht->seo_title = Str::slug($request->title);
-            $yacht->yacht_type_id = $request->yacht_type_id;
-            $yacht->trading_status = $request->trading_status;
-            $yacht->country = $request->country;
-            $yacht->price = $request->price;
-            $yacht->currency = $request->currency;
-            $yacht->description = $request->description;
-            $yacht->is_recommended = $request->is_recommended;
-            $yacht->status = $request->status;
+        $yacht->title = $request->title;
+        $yacht->seo_title = Str::slug($request->title);
+        $yacht->yacht_type_id = $request->yacht_type_id;
+        $yacht->trading_status = $request->trading_status;
+        $yacht->country = $request->country;
+        $yacht->price = $request->price;
+        $yacht->currency = $request->currency;
+        $yacht->description = $request->description;
+        $yacht->is_recommended = $request->is_recommended;
+        $yacht->status = $request->status;
 
-            //Banner Image Upload
+        //Banner Image Upload
 
-            if ($request->hasFile("banner_image")) {
-                $old_banner = $yacht->banner_image;
-                // Formdan gelen resim dosyasını al
-                $image = $request->file('banner_image');
+        if ($request->hasFile("banner_image")) {
+            $old_banner = $yacht->banner_image;
+            // Formdan gelen resim dosyasını al
+            $image = $request->file('banner_image');
 
-                // Resmin adını benzersiz bir şekilde oluştur
-                $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            // Resmin adını benzersiz bir şekilde oluştur
+            $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
 
-                // Resmi belirli bir klasöre kaydet
-                $imagePath = public_path('images/custom-images/' . $imageName);
-                Image::make($image->getRealPath())->resize(1280, 768)->save($imagePath);
+            // Resmi belirli bir klasöre kaydet
+            $imagePath = public_path('images/custom-images/' . $imageName);
+            Image::make($image->getRealPath())->resize(1280, 768)->save($imagePath);
 
-                $yacht->banner_image = $imageName;
+            $yacht->banner_image = $imageName;
+            if ($yacht->banner_image != null) {
                 if (File::exists(public_path('images/custom-images/') . $old_banner)) unlink(public_path('/images/custom-images/') . $old_banner);
             }
+        }
 
-            //Thumbnail image upload
-            if ($request->hasFile("thumbnail_image")) {
-                $old_thumbnail = $yacht->thumbnail_image;
-                // Formdan gelen resim dosyasını al
-                $image = $request->file('thumbnail_image');
+        $yacht->save();
 
-                // Resmin adını benzersiz bir şekilde oluştur
+        //Thumbnail image upload
+        if ($request->hasFile("thumbnail_image")) {
+            $old_thumbnail = $yacht->thumbnail_image;
+            // Formdan gelen resim dosyasını al
+            $image = $request->file('thumbnail_image');
+
+            // Resmin adını benzersiz bir şekilde oluştur
+            $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+            // Resmi belirli bir klasöre kaydet
+            $imagePath = public_path('images/custom-images/' . $imageName);
+            Image::make($image->getRealPath())->resize(1280, 768)->save($imagePath);
+
+            $yacht->thumbnail_image = $imageName;
+            if ($yacht->thumbnail_image != null) {
+                if (File::exists(public_path('images/custom-images/') . $old_thumbnail)) unlink(public_path('images/custom-images/') . $old_thumbnail);
+            }
+        }
+
+
+        $yacht->save();
+
+        //Slider Images Upload
+        if ($request->hasFile('slider_images')) {
+            // Eski resimleri bul ve sil
+            $old_images = YachtImages::where('yacht_id', $yacht->id)->get();
+            if (isset($old_images)) {
+                foreach ($old_images as $old_image) {
+                    $imagePath = public_path('images/custom-images/' . $old_image->image);
+                    unlink($imagePath); // Fiziksel dosyayı sil
+                    $old_image->delete(); // Veritabanından kaydı sil
+                }
+            }
+
+            // Yeni resimleri kaydet
+            $slider_images = $request->file('slider_images');
+            foreach ($slider_images as $image) {
+                $new_slider_image = new YachtImages;
+                $new_slider_image->yacht_id = $yacht->id;
+
+                // Resim adı
                 $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
 
                 // Resmi belirli bir klasöre kaydet
                 $imagePath = public_path('images/custom-images/' . $imageName);
                 Image::make($image->getRealPath())->resize(1280, 768)->save($imagePath);
 
-                $yacht->thumbnail_image = $imageName;
-                if (File::exists(public_path('images/custom-images/') . $old_thumbnail)) unlink(public_path('images/custom-images/') . $old_thumbnail);
-            }
+                $new_slider_image->image = $imageName;
 
-
-            $yacht->save();
-
-            //Slider Images Upload
-            if ($request->hasFile('slider_images')) {
-                // Eski resimleri bul ve sil
-                $old_images = YachtImages::where('yacht_id', $yacht->id)->get();
-                if (isset($old_images)) {
-                    foreach ($old_images as $old_image) {
-                        $imagePath = public_path('images/custom-images/' . $old_image->image);
-                        unlink($imagePath); // Fiziksel dosyayı sil
-                        $old_image->delete(); // Veritabanından kaydı sil
-                    }
-                }
-
-                // Yeni resimleri kaydet
-                $slider_images = $request->file('slider_images');
-                foreach ($slider_images as $image) {
-                    $new_slider_image = new YachtImages;
-                    $new_slider_image->yacht_id = $yacht->id;
-
-                    // Resim adı
-                    $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
-
-                    // Resmi belirli bir klasöre kaydet
-                    $imagePath = public_path('images/custom-images/' . $imageName);
-                    Image::make($image->getRealPath())->resize(1280, 768)->save($imagePath);
-
-                    $new_slider_image->image = $imageName;
-
-                    if ($new_slider_image->save()) {
-                        // dd("Başarılı"); // Bu satır döngü içinde olmamalı
-                    } else {
-                        dd("Başarısız: " . implode(", ", $new_slider_image->getErrors())); // Hata mesajını göster
-                    }
+                if ($new_slider_image->save()) {
+                    // dd("Başarılı"); // Bu satır döngü içinde olmamalı
+                } else {
+                    dd("Başarısız: " . implode(", ", $new_slider_image->getErrors())); // Hata mesajını göster
                 }
             }
-
-            //Electronic Systems
-            if ($request->has('electronic_systems')) {
-                $electronic_systems = $request->electronic_systems;
-                YachtElectronicSystems::where('yacht_id', $yacht->id)->delete();
-                foreach ($electronic_systems as $system) {
-                    $yacht_electronic_system = new YachtElectronicSystems;
-                    $yacht_electronic_system->system_id = $system;
-                    $yacht_electronic_system->yacht_id = $yacht->id;
-
-                    if ($yacht_electronic_system->save()) {
-                        // dd("Başarılı"); // Bu satır döngü içinde olmamalı
-                    } else {
-                        dd("Başarısız: " . $yacht_electronic_system->getErrors()); // Hata mesajını göster
-                    }
-                }
-            }
-
-            //Technical Specifications
-            if ($request->has('specifications')) {
-                $specifications = $request->specifications;
-                $specificationIds = $request->specification_ids;
-                YachtTechincalSpecifications::where('yacht_id', $yacht->id)->delete();
-
-                foreach ($specifications as $key => $specification) {
-                    $yacht_technical_specifications = new YachtTechincalSpecifications;
-
-                    // Eğer her spesifikasyonun kendine özgü bir ID'si varsa
-                    $specificationId = $specificationIds[$key];
-                    $yacht_technical_specifications->specification_id = $specificationId;
-
-                    // Eğer her spesifikasyonun ID'si aynı ve tüm spesifikasyonlar için tek bir ID kullanılacaksa
-                    // $yacht_technical_specifications->specification_id = $request->specification_id;
-
-                    $yacht_technical_specifications->yacht_id = $yacht->id;
-                    $yacht_technical_specifications->specification_value = $specification;
-
-                    if ($yacht_technical_specifications->save()) {
-                        // Başarılı kayıt durumu
-                    } else {
-                        dd("Başarısız: " . $yacht_technical_specifications->getErrors());
-                    }
-                }
-            }
-
-
-
-            return response()->json(['success' => 'Yat başarıyla güncellendi.', 'redirect' => route('admin.tekneler')]);
         }
+
+        $yacht->save();
+
+        //Electronic Systems
+        if ($request->has('electronic_systems')) {
+            $electronic_systems = $request->electronic_systems;
+            YachtElectronicSystems::where('yacht_id', $yacht->id)->delete();
+            foreach ($electronic_systems as $system) {
+                $yacht_electronic_system = new YachtElectronicSystems;
+                $yacht_electronic_system->system_id = $system;
+                $yacht_electronic_system->yacht_id = $yacht->id;
+
+                if ($yacht_electronic_system->save()) {
+                    // dd("Başarılı"); // Bu satır döngü içinde olmamalı
+                } else {
+                    dd("Başarısız: " . $yacht_electronic_system->getErrors()); // Hata mesajını göster
+                }
+            }
+        }
+
+        //Technical Specifications
+        if ($request->has('specifications')) {
+            $specifications = $request->specifications;
+            $specificationIds = $request->specification_ids;
+            YachtTechincalSpecifications::where('yacht_id', $yacht->id)->delete();
+
+            foreach ($specifications as $key => $specification) {
+                $yacht_technical_specifications = new YachtTechincalSpecifications;
+
+                // Eğer her spesifikasyonun kendine özgü bir ID'si varsa
+                $specificationId = $specificationIds[$key];
+                $yacht_technical_specifications->specification_id = $specificationId;
+
+                // Eğer her spesifikasyonun ID'si aynı ve tüm spesifikasyonlar için tek bir ID kullanılacaksa
+                // $yacht_technical_specifications->specification_id = $request->specification_id;
+
+                $yacht_technical_specifications->yacht_id = $yacht->id;
+                $yacht_technical_specifications->specification_value = $specification;
+
+                if ($yacht_technical_specifications->save()) {
+                    // Başarılı kayıt durumu
+                } else {
+                    dd("Başarısız: " . $yacht_technical_specifications->getErrors());
+                }
+            }
+        }
+
+
+
+        return response()->json(['success' => 'Yat başarıyla güncellendi.', 'redirect' => route('admin.tekneler')]);
+    }
 
     public function destroy($id)
     {

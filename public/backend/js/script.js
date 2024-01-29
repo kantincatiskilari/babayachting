@@ -235,6 +235,28 @@ function updateYachtStatus(yachtId, status) {
     });
 }
 
+function updatePageStatus(pageId, status) {
+    var csrfToken = $('meta[name="csrf-token"]').attr("content"); // CSRF token'ını al
+
+    $.ajax({
+        url: "/admin/update-page-status",
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": csrfToken, // CSRF token'ını başlık olarak ekle
+        },
+        data: {
+            pageId: pageId,
+            status: status,
+        },
+        success: function (response) {
+            toastr.success(response.success);
+        },
+        error: function (error) {
+            toastr.error(error);
+        },
+    });
+}
+
 //Update
 
 //Tip
@@ -345,7 +367,8 @@ $(document).ready(function () {
 
         // Form içindeki #yachtId öğesinin değerini al
         var yachtId = $("#updateForm #yachtId").val();
-        var formData = $("#updateForm").serialize();
+        var formData = new FormData($("#updateForm")[0]);
+        console.log(formData)
 
         // updateYacht fonksiyonunu çağır
         updateYacht(yachtId, formData);
@@ -360,6 +383,8 @@ $(document).ready(function () {
             headers: {
                 "X-CSRF-TOKEN": csrfToken,
             },
+            processData: false,  // FormData nesnesini işleme tabi tutma
+            contentType: false,  // Content-Type başlığını elle belirtme
             data: formData,
             success: function (response) {
                 toastr.success(response.success);

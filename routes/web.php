@@ -1,17 +1,22 @@
 <?php
 
-use App\Http\Controllers\Admin\Auth\AuthController;
-use App\Http\Controllers\Admin\Profile\AdminProfileController;
-use App\Http\Controllers\Admin\Specifications\ElectronicController;
-use App\Http\Controllers\Admin\Specifications\TypeController;
-use App\Http\Controllers\Admin\Specifications\TechnicalSpecifications;
-use App\Http\Controllers\Admin\Yachts\YachtController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Frontend\HomepageController;
+use App\Http\Controllers\Admin\Yachts\YachtController;
+use App\Http\Controllers\Admin\Settings\PageController;
+use App\Http\Controllers\Admin\Settings\BannerController;
+use App\Http\Controllers\Admin\Specifications\TypeController;
+use App\Http\Controllers\Admin\Profile\AdminProfileController;
+use App\Http\Controllers\Admin\Specifications\ElectronicController;
+use App\Http\Controllers\Admin\Specifications\TechnicalSpecifications;
 
 //Auth
 Route::get("/admin/login", [AuthController::class, 'showLogin'])->name('login');
 Route::post('/admin/login', [AuthController::class, 'login']);
+
+//Admin
 Route::group(['middleware' => 'auth.user', 'as' => 'admin.', 'prefix' => 'admin'], function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
@@ -50,4 +55,14 @@ Route::group(['middleware' => 'auth.user', 'as' => 'admin.', 'prefix' => 'admin'
     Route::post('/update-electronic-status', [ElectronicController::class, 'updateStatus']);
     Route::post('/elektronik-duzenle', [ElectronicController::class, 'edit']);
     Route::delete('elektronik-sil/{id}', [ElectronicController::class, 'delete']);
+
+    //Ayarlar
+    Route::get('/banner-resimleri',[BannerController::class,'index'])->name('banner-resimleri');
+    Route::post('/banner-resmi/guncelle/{id}',[BannerController::class,'store'])->name('banner-resmi-guncelle');
+    Route::get('/sayfalar',[PageController::class,'index'])->name('sayfalar');
+    Route::post('update-page-status',[PageController::class,'updateStatus']);
+    Route::post('sayfa-ekle',[PageController::class,'store'])->name('sayfa-ekle');
 });
+
+//Frontend
+Route::get('/',[HomepageController::class,'index'])->name('home');
