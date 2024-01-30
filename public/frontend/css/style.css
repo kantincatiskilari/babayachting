@@ -1,8 +1,19 @@
-*{
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700&display=swap");
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
+
+:root {
+    /* Colors */
+    --brand-color: hsl(46, 100%, 50%);
+    --black: hsl(0, 0%, 0%);
+    --white: hsl(0, 0%, 100%);
+    /* Fonts */
+    --font-title: "Montserrat", sans-serif;
+    --font-text: "Lato", sans-serif;
+  }
 
 body {
     margin: 0;
@@ -12,63 +23,66 @@ body {
     flex-direction: column;
 }
 
-
-a{
+a {
     text-decoration: none;
     color: inherit;
 }
 
-li{
+li {
     list-style: none;
 }
 
-.navbar{
+.navbar {
     padding: 40px 0;
     height: 60px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     background-color: white !important;
     border-bottom: 1px solid lightgray;
 }
 
-.container{
+.container {
     color: inherit;
     letter-spacing: 1px;
 }
 
-.navbar .container a{
+.navbar .container a {
     color: rgb(39, 38, 38);
     font-weight: 700;
 }
 
 .navbar .container a:hover {
     color: rgb(165, 47, 56);
-    transition: .5s ease all;
+    transition: 0.5s ease all;
 }
 
-.container .right ul{
-    width: fit-content;;
-
+.navbar .container .nav-link:hover {
+    color: rgb(165, 47, 56);
+    transition: 0.5s ease all;
 }
 
-.container .nav-link{
+.container .right ul {
+    width: fit-content;
+}
+
+.container .nav-link {
     font-weight: 600 !important;
     list-style: none;
     color: rgb(78, 76, 76) !important;
 }
 
-.container .nav-link:hover{
+.container .nav-link:hover {
     color: rgb(165, 47, 56);
-    transition: .5s ease all;
+    transition: 0.5s ease all;
 }
 
-.upper-footer{
+.upper-footer {
     padding: 50px;
     box-sizing: border-box;
     background-color: #24324a;
     width: 100%;
 }
 
-.upper-footer-logo{
+.upper-footer-logo {
     color: white;
     padding-top: 30px;
     padding-left: 30px;
@@ -76,29 +90,29 @@ li{
     font-weight: 700;
 }
 
-.footer-address-item{
+.footer-address-item {
     font-size: 16px;
     padding: 0 30px;
     color: rgba(240, 248, 255, 0.637) !important;
 }
 
-.footer-address-item i{
+.footer-address-item i {
     background-color: rgb(117, 35, 35);
     padding: 5px 7px;
     border-radius: 3px;
 }
 
-.upper-footer-center h5{
+.upper-footer-center h5 {
     padding: 30px;
     font-size: 22px;
     color: #fff;
 }
 
-.upper-footer-pages{
+.upper-footer-pages {
     color: rgba(240, 248, 255, 0.637) !important;
 }
 
-.upper-footer-right h5{
+.upper-footer-right h5 {
     padding: 30px;
     font-size: 22px;
     color: #fff;
@@ -114,27 +128,23 @@ li{
     cursor: pointer;
 }
 
-.upper-footer-right ul li:nth-child(1)
-{
-    background-color: #1877F2;
+.upper-footer-right ul li:nth-child(1) {
+    background-color: #1877f2;
     color: white;
 }
 
-.upper-footer-right ul li:nth-child(2)
-{
-    background-color: #1DA1F2;
+.upper-footer-right ul li:nth-child(2) {
+    background-color: #1da1f2;
     color: white;
 }
 
-.upper-footer-right ul li:nth-child(3)
-{
+.upper-footer-right ul li:nth-child(3) {
     background-color: #0077b5;
     color: white;
 }
 
-.upper-footer-right ul li:nth-child(4)
-{
-    background-color: #25D366;
+.upper-footer-right ul li:nth-child(4) {
+    background-color: #25d366;
     color: white;
 }
 
@@ -152,27 +162,65 @@ li{
     box-sizing: border-box; /* Padding'i ve border'ı elemanın genişliğine dahil etmek için */
 }
 
-.banner_section{
+.banner_section {
     margin-bottom: 30px;
 }
 
-.banner-image img{
+.banner-image {
+    position: relative;
+}
+
+.banner-title {
+    position: absolute;
+    top: 50%;
+    left: 300px;
+    background-color: #7299dd;
+    color: #fff;
+    padding: 30px 50px;
+    font-size: 33px;
+    font-weight: bold;
+}
+
+.banner-image {
+    position: relative;
+}
+
+.banner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 43px;
+    font-weight: bold;
+}
+
+.banner-image img {
     width: 100%;
     height: 668px;
     object-fit: cover;
 }
 
-.items-title{
-    font-size: 36px;
-    color: #1877F2;
+.current-items,
+.sold-items {
+    background-color: #f5f5f5;
+    padding: 100px 0;
 }
 
-.items-subtitle{
+.title-container {
+    margin-bottom: 80px;
+}
+
+.items-title {
+    font-size: 40px;
+    color: #1877f2;
+}
+
+.items-subtitle {
     color: #0072b1;
 }
 
-
-.card .trading-status{
+.card .trading-status {
     position: absolute;
     top: 30px;
     left: 30px;
@@ -184,20 +232,47 @@ li{
     border: none;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
     width: 25rem;
-    height:30rem;
+    height: 30rem;
 }
 
-.card .yacht_title{
+.card .yacht_title {
     font-weight: 600;
     font-size: 22px;
     color: #d61646;
 }
 
-.card .yacht_price{
+.card .yacht_price {
     position: absolute;
     right: 0;
-    background-color: blueviolet;
+    background-color: rgb(136, 70, 197);
     color: white;
-    border-radius: 6px;
     font-weight: 700;
 }
+
+.specification_key {
+    background-color: lightseagreen;
+    padding: 3px 5px;
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    font-family: "Roboto", sans-serif;
+}
+
+.yacht-card{
+    width: 100%;
+    height: 250px;
+}
+
+.yacht-card img{
+    height: 80%;
+}
+
+

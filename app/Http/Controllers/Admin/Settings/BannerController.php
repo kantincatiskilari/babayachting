@@ -12,8 +12,8 @@ class BannerController extends Controller
 {
     public function index()
     {
-        $pages = Page::all();
         $banners = BannerImage::all();
+        $pages = Page::where('status',1)->get();
         return view('admin.settings.banner_images', compact('pages','banners'));
     }
 
@@ -33,8 +33,6 @@ class BannerController extends Controller
             Image::make($image->getRealPath())->resize(1920, 1080)->save($imagePath);
 
             $page_banner->image = $imageName;
-
-
         }
         if($page_banner->save())
         {

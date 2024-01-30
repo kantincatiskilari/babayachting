@@ -34,6 +34,7 @@
                                 <select name="trading_status" class="form-select">
                                     <option value="1">Satılık</option>
                                     <option value="2">Kiralık</option>
+                                    <option value="3">Satıldı</option>
                                 </select>
                             </div>
                         </div>

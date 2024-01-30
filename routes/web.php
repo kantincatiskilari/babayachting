@@ -2,11 +2,14 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Frontend\HomepageController;
 use App\Http\Controllers\Admin\Yachts\YachtController;
+use App\Http\Controllers\Frontend\YachtPageController;
 use App\Http\Controllers\Admin\Settings\PageController;
 use App\Http\Controllers\Admin\Settings\BannerController;
+use App\Http\Controllers\Admin\Pages\AdminAboutController;
 use App\Http\Controllers\Admin\Specifications\TypeController;
 use App\Http\Controllers\Admin\Profile\AdminProfileController;
 use App\Http\Controllers\Admin\Specifications\ElectronicController;
@@ -62,7 +65,14 @@ Route::group(['middleware' => 'auth.user', 'as' => 'admin.', 'prefix' => 'admin'
     Route::get('/sayfalar',[PageController::class,'index'])->name('sayfalar');
     Route::post('update-page-status',[PageController::class,'updateStatus']);
     Route::post('sayfa-ekle',[PageController::class,'store'])->name('sayfa-ekle');
+
+    //Sayfalar
+    Route::get('/hakkimizda',[AdminAboutController::class,'index'])->name('hakkimizda');
+    Route::post('/hakkimizda/ekle',[AdminAboutController::class,'store'])->name('hakkimizda-ekle');
 });
 
 //Frontend
 Route::get('/',[HomepageController::class,'index'])->name('home');
+Route::get('/anasayfa',[HomepageController::class,'index']);
+Route::get('/hakkimizda',[AboutController::class,'index'])->name('hakkimizda');
+Route::get('/tekneler',[YachtPageController::class,'index'])->name('tekneler');

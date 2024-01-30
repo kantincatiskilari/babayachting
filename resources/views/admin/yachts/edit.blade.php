@@ -36,6 +36,8 @@
                                     </option>
                                     <option value="2" {{ $yacht->trading_status == 2 ? 'selected' : '' }}>Kiralık
                                     </option>
+                                    <option value="3" {{ $yacht->trading_status == 3 ? 'selected' : '' }}>Satıldı
+                                    </option>
                                 </select>
                             </div>
                         </div>
