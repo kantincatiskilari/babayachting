@@ -101,6 +101,39 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    $("#storeFaqButton").click(function (e) {
+        e.preventDefault();
+        var formData = {
+            question: $('input[name="question"]').val(),
+            answer: $('textarea[name="answer"]').val(),
+            status: $('select[name="status"]').val(),
+        };
+
+        // updateType fonksiyonunu çağır
+        storeFaq(formData);
+    });
+
+    function storeFaq(formData) {
+        var csrfToken = $('meta[name="csrf-token"]').attr("content");
+
+        $.ajax({
+            url: "/admin/sikca-sorulan-sorular/ekle",
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": csrfToken,
+            },
+            data: formData,
+            success: function (response) {
+                toastr.success(response.success);
+
+                location.reload();
+            },
+            error: function () {},
+        });
+    }
+});
+
+$(document).ready(function () {
     $("#storeYachtButton").click(function (e) {
         e.preventDefault();
 
@@ -126,8 +159,8 @@ $(document).ready(function () {
             headers: {
                 "X-CSRF-TOKEN": csrfToken,
             },
-            processData: false,  // FormData nesnesini işleme tabi tutma
-            contentType: false,  // Content-Type başlığını elle belirtme
+            processData: false, // FormData nesnesini işleme tabi tutma
+            contentType: false, // Content-Type başlığını elle belirtme
             data: formData,
             success: function (response) {
                 toastr.success(response.success);
@@ -144,7 +177,6 @@ $(document).ready(function () {
         });
     }
 });
-
 
 //Update Status
 function updateTypeStatus(typeId, status) {
@@ -224,6 +256,28 @@ function updateYachtStatus(yachtId, status) {
         },
         data: {
             id: yachtId,
+            status: status,
+        },
+        success: function (response) {
+            toastr.success(response.success);
+        },
+        error: function (error) {
+            toastr.error(error);
+        },
+    });
+}
+
+function updateFaqStatus(faqId, status) {
+    var csrfToken = $('meta[name="csrf-token"]').attr("content"); // CSRF token'ını al
+
+    $.ajax({
+        url: "/admin/update-faq-status",
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": csrfToken, // CSRF token'ını başlık olarak ekle
+        },
+        data: {
+            id: faqId,
             status: status,
         },
         success: function (response) {
@@ -368,7 +422,7 @@ $(document).ready(function () {
         // Form içindeki #yachtId öğesinin değerini al
         var yachtId = $("#updateForm #yachtId").val();
         var formData = new FormData($("#updateForm")[0]);
-        console.log(formData)
+        console.log(formData);
 
         // updateYacht fonksiyonunu çağır
         updateYacht(yachtId, formData);
@@ -383,8 +437,8 @@ $(document).ready(function () {
             headers: {
                 "X-CSRF-TOKEN": csrfToken,
             },
-            processData: false,  // FormData nesnesini işleme tabi tutma
-            contentType: false,  // Content-Type başlığını elle belirtme
+            processData: false, // FormData nesnesini işleme tabi tutma
+            contentType: false, // Content-Type başlığını elle belirtme
             data: formData,
             success: function (response) {
                 toastr.success(response.success);
@@ -442,7 +496,6 @@ $(document).ready(function () {
     }
 });
 
-
 //Delete
 $(document).ready(function () {
     var csrfToken = $('meta[name="csrf-token"]').attr("content");
@@ -468,7 +521,9 @@ $(document).ready(function () {
                             },
                             success: function (response) {
                                 toastr.success(response.success);
-                                location.reload();
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 3000);
                             },
                             error: function (response) {
                                 toastr.error(response.responseJSON.error);
@@ -489,6 +544,8 @@ $(document).ready(function () {
         );
         bindDeleteEvent(".deleteElectronicBtn", "/admin/elektronik-sil/");
         bindDeleteEvent(".deleteYachtBtn", "/admin/tekne-sil/");
+        bindDeleteEvent(".deleteFaqBtn", "/admin/s.s.s-sil/");
+        bindDeleteEvent(".deleteContactBtn", "/admin/iletisim-sil/");
     });
 
     // İlk yükleme için silme butonlarına olayı tanımla
@@ -496,4 +553,7 @@ $(document).ready(function () {
     bindDeleteEvent(".deleteSpecificationBtn", "/admin/teknik-ozellik-sil/");
     bindDeleteEvent(".deleteElectronicBtn", "/admin/elektronik-sil/");
     bindDeleteEvent(".deleteYachtBtn", "/admin/tekne-sil/");
+    bindDeleteEvent(".deleteFaqBtn", "/admin/s.s.s-sil/");
+    bindDeleteEvent(".deleteContactBtn", "/admin/iletisim-sil/");
+
 });

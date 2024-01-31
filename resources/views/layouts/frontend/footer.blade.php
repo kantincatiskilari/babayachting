@@ -62,22 +62,22 @@
                 <ul class="d-flex gap-3">
                     <li>
 
-                        <a href="{{$user->facebook_address}}">
+                        <a href="{{ $user->facebook_address }}">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="{{$user->twitter_address}}">
+                        <a href="{{ $user->twitter_address }}">
                             <i class="fa-brands fa-twitter"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="{{$user->linkedin_address}}">
+                        <a href="{{ $user->linkedin_address }}">
                             <i class="fa-brands fa-linkedin-in"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="{{$user->whatsapp_address}}">
+                        <a href="{{ $user->whatsapp_address }}">
                             <i class="fa-brands fa-whatsapp"></i>
                         </a>
                     </li>
@@ -86,10 +86,11 @@
         </div>
     </div>
     <div class="bottom-footer text-center">
-        Copyright 2023, Babayachting. Bütün hakları saklıdır.
+        Copyright 2024, Babayachting. Bütün hakları saklıdır.
     </div>
 </footer>
 </body>
+
 
 </html>
 @yield('javascript')

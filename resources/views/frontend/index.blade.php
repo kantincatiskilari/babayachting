@@ -126,7 +126,8 @@
                                 <img src="{{ asset('images/custom-images/') . '/' . $recent_yacht->thumbnail_image }}"
                                     alt="" />
                                 <div class="trading-status bg-danger p-2 rounded">
-                                    {{ $recent_yacht->status == 1 ? 'Satılık' : 'Kiralık' }}
+                                    {{ $recent_yacht->trading_status == 1 ? 'Satılık' : ($recent_yacht->trading_status == 2 ? 'Kiralık' : 'Satıldı') }}
+
                                 </div>
                                 <li class="yacht_price">{{ $recent_yacht->price }}{{ $recent_yacht->currency }}
                             </figure>

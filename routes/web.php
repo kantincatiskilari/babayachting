@@ -1,19 +1,33 @@
 <?php
 
+use App\Http\Controllers\Admin\Pages\AdminContactController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Frontend\FaqPageController;
 use App\Http\Controllers\Frontend\HomepageController;
 use App\Http\Controllers\Admin\Yachts\YachtController;
 use App\Http\Controllers\Frontend\YachtPageController;
 use App\Http\Controllers\Admin\Settings\PageController;
+use App\Http\Controllers\Admin\Pages\AdminFaqController;
+use App\Http\Controllers\Frontend\ContactPageController;
 use App\Http\Controllers\Admin\Settings\BannerController;
 use App\Http\Controllers\Admin\Pages\AdminAboutController;
 use App\Http\Controllers\Admin\Specifications\TypeController;
 use App\Http\Controllers\Admin\Profile\AdminProfileController;
 use App\Http\Controllers\Admin\Specifications\ElectronicController;
 use App\Http\Controllers\Admin\Specifications\TechnicalSpecifications;
+
+//Frontend
+Route::get('/',[HomepageController::class,'index'])->name('home');
+Route::get('/anasayfa',[HomepageController::class,'index']);
+Route::get('/hakkimizda',[AboutController::class,'index'])->name('hakkimizda');
+Route::get('/tekneler',[YachtPageController::class,'index'])->name('tekneler');
+Route::get('/sikca-sorulan-sorular',[FaqPageController::class,'index'])->name('s.s.s');
+Route::get('/iletisim',[ContactPageController::class,'index'])->name('iletisim');
+Route::post('/iletisim/gonder',[ContactPageController::class,'store'])->name('iletisim-gonder');
+
 
 //Auth
 Route::get("/admin/login", [AuthController::class, 'showLogin'])->name('login');
@@ -69,10 +83,11 @@ Route::group(['middleware' => 'auth.user', 'as' => 'admin.', 'prefix' => 'admin'
     //Sayfalar
     Route::get('/hakkimizda',[AdminAboutController::class,'index'])->name('hakkimizda');
     Route::post('/hakkimizda/ekle',[AdminAboutController::class,'store'])->name('hakkimizda-ekle');
+    Route::get('/sikca-sorulan-sorular',[AdminFaqController::class,'index'])->name('s.s.s');
+    Route::post('/update-faq-status',[AdminFaqController::class,'updateStatus']);
+    Route::post('/sikca-sorulan-sorular/ekle',[AdminFaqController::class,'store'])->name('s.s.s-ekle');
+    Route::delete('/s.s.s-sil/{id}',[AdminFaqController::class,'delete'])->name('s.s.s-sil');
+    Route::get('/iletisim', [AdminContactController::class,'index'])->name('iletisim');
+    Route::delete('/iletisim-sil/{id}',[AdminContactController::class,'delete'])->name('iletisim-sil');
 });
 
-//Frontend
-Route::get('/',[HomepageController::class,'index'])->name('home');
-Route::get('/anasayfa',[HomepageController::class,'index']);
-Route::get('/hakkimizda',[AboutController::class,'index'])->name('hakkimizda');
-Route::get('/tekneler',[YachtPageController::class,'index'])->name('tekneler');

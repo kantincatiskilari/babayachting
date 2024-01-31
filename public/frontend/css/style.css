@@ -269,6 +269,7 @@ main {
 .yacht-card{
     width: 100%;
     height: 250px;
+    border-radius: 30px;
 }
 
 .yacht-card img{
@@ -414,4 +415,5 @@ article {
     white-space: nowrap;
     width: 1px;
   }
+
 
