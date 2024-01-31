@@ -8,6 +8,7 @@ use App\Models\Yacht;
 use App\Models\BannerImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\YachtTechincalSpecifications;
 
 class YachtPageController extends Controller
 {
@@ -17,6 +18,7 @@ class YachtPageController extends Controller
         $banner_image = BannerImage::find(3);
         $user = User::get()->first();
         $pages = Page::where('status', 1)->get();
-        return view('frontend.pages.yachts',compact('yachts','banner_image','user','pages'));
+        $selectedSpecifications = YachtTechincalSpecifications::whereIn('specification_id', [4, 5, 6, 7])->get();
+        return view('frontend.pages.yachts',compact('yachts','banner_image','user','pages','selectedSpecifications'));
     }
 }

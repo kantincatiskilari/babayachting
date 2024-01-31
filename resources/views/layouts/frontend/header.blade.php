@@ -29,7 +29,7 @@
         }
 
     @endphp
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
         <div class="container">
             <div class="navbar-brand">
                 <a href="/">BABAYACHTING</a>
