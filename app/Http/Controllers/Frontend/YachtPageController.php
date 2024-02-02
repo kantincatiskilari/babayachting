@@ -10,6 +10,8 @@ use App\Models\BannerImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\YachtElectronicSystems;
+use App\Models\YachtImages;
 use App\Models\YachtTechincalSpecifications;
 
 class YachtPageController extends Controller
@@ -26,5 +28,16 @@ class YachtPageController extends Controller
         ->groupBy('yacht_type_id')
         ->get();
         return view('frontend.pages.yachts', compact('yachts', 'banner_image', 'user', 'pages', 'selectedSpecifications', 'yachtCountsByType'));
+    }
+
+    public function show($slug)
+    {
+        $yacht = Yacht::where('seo_title', $slug)->first();
+        $user = User::get()->first();
+        $pages = Page::where('status', 1)->get();
+        $technicalSpecifications = YachtTechincalSpecifications::where('yacht_id',$yacht->id)->get();
+        $yachtImages = YachtImages::where('yacht_id',$yacht->id)->get();
+        $electronicSystems = YachtElectronicSystems::where('yacht_id',$yacht->id)->get();
+        return view('frontend.pages.yacht', compact('yacht', 'user', 'pages', 'technicalSpecifications','yachtImages','electronicSystems'));
     }
 }

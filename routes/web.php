@@ -27,6 +27,7 @@ Route::get('/tekneler',[YachtPageController::class,'index'])->name('tekneler');
 Route::get('/sikca-sorulan-sorular',[FaqPageController::class,'index'])->name('s.s.s');
 Route::get('/iletisim',[ContactPageController::class,'index'])->name('iletisim');
 Route::post('/iletisim/gonder',[ContactPageController::class,'store'])->name('iletisim-gonder');
+Route::get('/tekne/{slug}',[YachtPageController::class,'show'])->name('tekne');
 
 
 //Auth

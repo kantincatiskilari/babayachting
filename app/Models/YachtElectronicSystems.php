@@ -9,12 +9,12 @@ class YachtElectronicSystems extends Model
 {
     use HasFactory;
 
-    public function electronSystem()
+    public function electronicSystem()
     {
         return $this->belongsTo(ElectronicSystems::class,'system_id');
     }
 
-    public function yachts()
+    public function yacht()
     {
         return $this->belongsTo(Yacht::class,'yacht_id');
     }

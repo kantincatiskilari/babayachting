@@ -13,7 +13,7 @@
     /* Fonts */
     --font-title: "Montserrat", sans-serif;
     --font-text: "Lato", sans-serif;
-  }
+}
 
 body {
     margin: 0;
@@ -207,7 +207,6 @@ li {
     object-fit: cover;
 }
 
-
 .current-items,
 .sold-items {
     background-color: #f5f5f5;
@@ -234,9 +233,6 @@ li {
     color: #fff;
     font-weight: 500;
 }
-
-
-
 
 .yacht_price {
     position: absolute;
@@ -266,13 +262,13 @@ main {
     font-family: "Roboto", sans-serif;
 }
 
-.yacht-card{
+.yacht-card {
     width: 100%;
     height: 250px;
     border-radius: 30px;
 }
 
-.yacht-card img{
+.yacht-card img {
     height: 80%;
 }
 
@@ -288,54 +284,54 @@ article {
     transform-origin: center;
     transition: all 0.4s ease-in-out;
     overflow: hidden;
-  }
+}
 
-  article a::after {
+article a::after {
     position: absolute;
     inset-block: 0;
     inset-inline: 0;
     cursor: pointer;
     content: "";
-  }
+}
 
-  /* basic article elements styling */
-  article h2 {
+/* basic article elements styling */
+article h2 {
     margin: 0 0 18px 0;
     font-size: 1.9rem;
     color: var(--title-color);
     transition: color 0.3s ease-out;
-  }
+}
 
-  figure {
+figure {
     margin: 0;
     padding: 0;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-  }
+}
 
-  article img {
+article img {
     max-width: 100%;
     transform-origin: center;
     transform: scale(var(--img-scale));
     transition: transform 0.4s ease-in-out;
-  }
+}
 
-  .article-body {
+.article-body {
     padding: 24px;
-  }
+}
 
-  article a {
+article a {
     display: inline-flex;
     align-items: center;
     text-decoration: none;
     color: #28666e;
-  }
+}
 
-  article a:focus {
+article a:focus {
     outline: 1px dotted #28666e;
-  }
+}
 
-  article a .icon {
+article a .icon {
     min-width: 24px;
     width: 24px;
     height: 24px;
@@ -343,70 +339,68 @@ article {
     transform: translateX(var(--link-icon-translate));
     opacity: var(--link-icon-opacity);
     transition: all 0.3s;
-  }
+}
 
-  /* using the has() relational pseudo selector to update our custom properties */
-  article:has(:hover, :focus) {
+/* using the has() relational pseudo selector to update our custom properties */
+article:has(:hover, :focus) {
     --img-scale: 1.1;
     --title-color: #28666e;
     --link-icon-translate: 0;
     --link-icon-opacity: 1;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-  }
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+        rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
 
-
-  /************************
+/************************
   Generic layout (demo looks)
   **************************/
 
-  *,
-  *::before,
-  *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
-  }
+}
 
-
-
-  .articles {
+.articles {
     display: grid;
     max-width: 1200px;
     margin-inline: auto;
     padding-inline: 24px;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 24px;
-  }
+}
 
-  @media screen and (max-width: 960px) {
+@media screen and (max-width: 960px) {
     article {
-      container: card/inline-size;
+        container: card/inline-size;
     }
     .article-body p {
-      display: none;
+        display: none;
     }
-  }
+}
 
-  @container card (min-width: 380px) {
+@container card (min-width: 380px) {
     .article-wrapper {
-      display: grid;
-      grid-template-columns: 100px 1fr;
-      gap: 16px;
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        gap: 16px;
     }
     .article-body {
-      padding-left: 0;
+        padding-left: 0;
     }
     figure {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
     }
     figure img {
-      height: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
+        height: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
     }
-  }
+}
 
-  .sr-only:not(:focus):not(:active) {
+.sr-only:not(:focus):not(:active) {
     clip: rect(0 0 0 0);
     clip-path: inset(50%);
     height: 1px;
@@ -414,6 +408,127 @@ article {
     position: absolute;
     white-space: nowrap;
     width: 1px;
-  }
+}
 
+.slider .slider-item {
+    height: 550px;
+}
 
+.slider .slider-item img {
+    object-fit: cover;
+}
+
+.prev-slide {
+    z-index: 999;
+    cursor: pointer;
+    font-size: 50px; /* veya başka bir boyut */
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%);
+}
+
+.next-slide {
+    z-index: 999;
+    cursor: pointer;
+    font-size: 50px; /* veya başka bir boyut */
+    color: white;
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+}
+
+.card-center .card-item-title{
+    font-size: 35px;
+    color:teal;
+}
+
+.card-item-location{
+    font-size: 20px;
+    color: #0a547a;
+}
+
+.card-bottom ul li{
+    background-color: #f5f5f5;
+    padding: 5px 12px;
+    border-radius: 15px;
+}
+
+table {
+	width: 750px;
+	border-collapse: collapse;
+	margin:50px auto;
+	}
+
+/* Zebra striping */
+tr:nth-of-type(odd) {
+	background: #eee;
+	}
+
+th {
+	background: #3498db;
+	color: white;
+	font-weight: bold;
+	}
+
+td, th {
+	padding: 10px;
+	border: 1px solid #ccc;
+	text-align: left;
+	font-size: 18px;
+	}
+
+/*
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	table {
+	  	width: 100%;
+	}
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr {
+		display: block;
+	}
+
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+	tr { border: 1px solid #ccc; }
+
+	td {
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 50%;
+	}
+
+	td:before {
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+		/* Label the data */
+		content: attr(data-column);
+
+		color: #000;
+		font-weight: bold;
+	}
+
+}

@@ -44,7 +44,7 @@
                                         @endif
                                     @endforeach
                                 </div>
-                                <a href="#" class="read-more mt-3">
+                                <a href="{{ route('tekne', ['slug' => $recent_yacht->seo_title]) }}" class="read-more mt-3">
                                     Daha fazlası için <span class="sr-only">about {{ $recent_yacht->title }}</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20"
                                         fill="currentColor">
@@ -68,21 +68,21 @@
         </div>
         <div class="container d-flex gap-4 flex-wrap">
             <section class="articles">
-                @foreach ($suggested_yachts as $recent_yacht)
+                @foreach ($suggested_yachts as $key => $suggested_yacht)
                     <article style="border: 1px solid rgb(187, 186, 186)">
                         <div class="article-wrapper position-relative">
 
                             <figure>
-                                <img src="{{ asset('images/custom-images/') . '/' . $recent_yacht->thumbnail_image }}"
+                                <img src="{{ asset('images/custom-images/') . '/' . $suggested_yacht->thumbnail_image }}"
                                     alt="" />
                                 <div class="trading-status bg-danger p-2 rounded">
                                     {{ $recent_yacht->status == 1 ? 'Satılık' : 'Kiralık' }}
                                 </div>
-                                <li class="yacht_price">{{ $recent_yacht->price }}{{ $recent_yacht->currency }}
+                                <li class="yacht_price">{{ $suggested_yacht->price }}{{ $suggested_yacht->currency }}
                             </figure>
 
                             <div class="article-body">
-                                <h2 class="text-center">{{ $recent_yacht->title }}</h2>
+                                <h2 class="text-center">{{ $suggested_yacht->title }}</h2>
                                 <div class="card-body">
                                     @foreach ($selectedSpecifications as $specification)
                                         @if ($specification->yacht_id == $recent_yacht->id)
@@ -94,15 +94,18 @@
                                         @endif
                                     @endforeach
                                 </div>
-                                <a href="#" class="read-more mt-3">
-                                    Daha fazlası için <span class="sr-only">about {{ $recent_yacht->title }}</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20"
-                                        fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </a>
+
+                                    <a href="{{ route('tekne', ['slug' => $suggested_yacht->seo_title]) }}"
+                                        class="read-more mt-3">
+                                        Daha fazlası için <span class="sr-only"></span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </a>
+
                             </div>
                         </div>
                     </article>
@@ -118,25 +121,24 @@
         </div>
         <div class="container d-flex gap-4 flex-wrap">
             <section class="articles">
-                @foreach ($sold_yachts as $recent_yacht)
+                @foreach ($sold_yachts as $key => $sold_yacht)
                     <article>
                         <div class="article-wrapper position-relative">
 
                             <figure>
-                                <img src="{{ asset('images/custom-images/') . '/' . $recent_yacht->thumbnail_image }}"
+                                <img src="{{ asset('images/custom-images/') . '/' . $sold_yacht->thumbnail_image }}"
                                     alt="" />
                                 <div class="trading-status bg-danger p-2 rounded">
-                                    {{ $recent_yacht->trading_status == 1 ? 'Satılık' : ($recent_yacht->trading_status == 2 ? 'Kiralık' : 'Satıldı') }}
-
+                                    Satıldı
                                 </div>
-                                <li class="yacht_price">{{ $recent_yacht->price }}{{ $recent_yacht->currency }}
+                                <li class="yacht_price">{{ $sold_yacht->price }}{{ $sold_yacht->currency }}</li>
                             </figure>
 
                             <div class="article-body">
-                                <h2 class="text-center">{{ $recent_yacht->title }}</h2>
+                                <h2 class="text-center">{{ $sold_yacht->title }}</h2>
                                 <div class="card-body">
                                     @foreach ($selectedSpecifications as $specification)
-                                        @if ($specification->yacht_id == $recent_yacht->id)
+                                        @if ($specification->yacht_id == $sold_yacht->id)
                                             <div class="d-flex justify-content-between">
                                                 <div class="my-2">
                                                     {{ $specification->specification->specification_name }}:</div>
@@ -145,8 +147,9 @@
                                         @endif
                                     @endforeach
                                 </div>
-                                <a href="#" class="read-more mt-3">
-                                    Daha fazlası için <span class="sr-only">about {{ $recent_yacht->title }}</span>
+
+                                <a href="{{ route('tekne', ['slug' => $sold_yacht->seo_title]) }}" class="read-more mt-3">
+                                    Daha fazlası için <span class="sr-only">about {{ $sold_yacht->title }}</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20"
                                         fill="currentColor">
                                         <path fill-rule="evenodd"
@@ -154,11 +157,13 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </a>
+
                             </div>
                         </div>
                     </article>
                 @endforeach
             </section>
+
         </div>
     </section>
 @endsection
