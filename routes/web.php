@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\Pages\AdminContactController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Frontend\FaqPageController;
@@ -14,17 +14,23 @@ use App\Http\Controllers\Admin\Pages\AdminFaqController;
 use App\Http\Controllers\Frontend\ContactPageController;
 use App\Http\Controllers\Admin\Settings\BannerController;
 use App\Http\Controllers\Admin\Pages\AdminAboutController;
+use App\Http\Controllers\Admin\Pages\AdminContactController;
 use App\Http\Controllers\Admin\Specifications\TypeController;
 use App\Http\Controllers\Admin\Profile\AdminProfileController;
 use App\Http\Controllers\Admin\Specifications\ElectronicController;
 use App\Http\Controllers\Admin\Specifications\TechnicalSpecifications;
+use App\Http\Controllers\SitemapController;
+
+//Sitemap
+Route::get('/sitemap.xml', [SitemapController::class,'index'])->name('sitemap');
+
 
 //Frontend
-Route::get('/',[HomepageController::class,'index'])->name('home');
+Route::get('/',[HomepageController::class,'index'])->name('anasayfa');
 Route::get('/anasayfa',[HomepageController::class,'index']);
 Route::get('/hakkimizda',[AboutController::class,'index'])->name('hakkimizda');
 Route::get('/tekneler',[YachtPageController::class,'index'])->name('tekneler');
-Route::get('/sikca-sorulan-sorular',[FaqPageController::class,'index'])->name('s.s.s');
+Route::get('/sikca-sorulan-sorular',[FaqPageController::class,'index'])->name('sikca-sorulan-sorular');
 Route::get('/iletisim',[ContactPageController::class,'index'])->name('iletisim');
 Route::post('/iletisim/gonder',[ContactPageController::class,'store'])->name('iletisim-gonder');
 Route::get('/tekne/{slug}',[YachtPageController::class,'show'])->name('tekne');

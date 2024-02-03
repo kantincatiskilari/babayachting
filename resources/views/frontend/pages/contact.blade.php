@@ -16,7 +16,7 @@
     <section class="contact-section mb-5">
         <div class="container">
             <div class="content">
-                <div class="left-side">
+                <div class="left-side d-none d-lg-block">
                     <div class="address details">
                         <i class="fas fa-map-marker-alt"></i>
                         <div class="topic">Addres</div>

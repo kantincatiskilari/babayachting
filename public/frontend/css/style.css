@@ -33,11 +33,14 @@ li {
 }
 
 .navbar {
-    padding: 40px 0;
-    height: 60px;
+    height: 90px;
     font-family: "Montserrat", sans-serif;
     background-color: white !important;
     border-bottom: 1px solid lightgray;
+}
+
+.navbar-container{
+    height: 100%;
 }
 
 .container {
@@ -50,15 +53,11 @@ li {
     font-weight: 700;
 }
 
-.navbar .container a:hover {
-    color: rgb(165, 47, 56);
+.navbar .container a:hover, .navbar-nav li a:hover {
+    color: rgb(165, 47, 56) !important;
     transition: 0.5s ease all;
 }
 
-.navbar .container .nav-link:hover {
-    color: rgb(165, 47, 56);
-    transition: 0.5s ease all;
-}
 
 .container .right ul {
     width: fit-content;
@@ -284,6 +283,7 @@ article {
     transform-origin: center;
     transition: all 0.4s ease-in-out;
     overflow: hidden;
+    width: 100%;
 }
 
 article a::after {
@@ -370,35 +370,6 @@ article:has(:hover, :focus) {
     gap: 24px;
 }
 
-@media screen and (max-width: 960px) {
-    article {
-        container: card/inline-size;
-    }
-    .article-body p {
-        display: none;
-    }
-}
-
-@container card (min-width: 380px) {
-    .article-wrapper {
-        display: grid;
-        grid-template-columns: 100px 1fr;
-        gap: 16px;
-    }
-    .article-body {
-        padding-left: 0;
-    }
-    figure {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
-    figure img {
-        height: 100%;
-        aspect-ratio: 1;
-        object-fit: cover;
-    }
-}
 
 .sr-only:not(:focus):not(:active) {
     clip: rect(0 0 0 0);
@@ -485,50 +456,3 @@ Max width before this PARTICULAR table gets nasty
 This query will take effect for any screen smaller than 760px
 and also iPads specifically.
 */
-@media
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
-
-	table {
-	  	width: 100%;
-	}
-
-	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr {
-		display: block;
-	}
-
-	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr {
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-
-	tr { border: 1px solid #ccc; }
-
-	td {
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee;
-		position: relative;
-		padding-left: 50%;
-	}
-
-	td:before {
-		/* Now like a table header */
-		position: absolute;
-		/* Top/left values mimic padding */
-		top: 6px;
-		left: 6px;
-		width: 45%;
-		padding-right: 10px;
-		white-space: nowrap;
-		/* Label the data */
-		content: attr(data-column);
-
-		color: #000;
-		font-weight: bold;
-	}
-
-}

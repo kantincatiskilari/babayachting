@@ -60,7 +60,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="#" class="btn btn-success btn-circle">
+                                        <a href="{{route('tekne',['slug' => $yacht->seo_title])}}" class="btn btn-success btn-circle">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         <a href="{{route('admin.tekne-guncelle',['id' => $yacht->id])}}" class="btn btn-warning btn-circle">

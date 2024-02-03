@@ -126,7 +126,9 @@ $(document).ready(function () {
             success: function (response) {
                 toastr.success(response.success);
 
-                location.reload();
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
             },
             error: function () {},
         });
@@ -339,7 +341,9 @@ $(document).ready(function () {
             success: function (response) {
                 toastr.success(response.success);
 
-                location.reload();
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
             },
             error: function () {},
         });
@@ -372,7 +376,9 @@ $(document).ready(function () {
             success: function (response) {
                 toastr.success(response.success);
 
-                location.reload();
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
             },
             error: function () {},
         });
@@ -404,9 +410,12 @@ $(document).ready(function () {
                 electronic_name: electronicName,
             },
             success: function (response) {
+
                 toastr.success(response.success);
 
-                location.reload();
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
             },
             error: function () {},
         });
@@ -482,6 +491,9 @@ $(document).ready(function () {
             data: formData,
             success: function (response) {
                 toastr.success(response.success);
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
 
                 // Sunucu tarafında yapılan yönlendirme işlemi
                 if (response.redirect) {

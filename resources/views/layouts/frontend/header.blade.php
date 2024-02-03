@@ -13,9 +13,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
-    <link rel="stylesheet" href="{{asset('toastr/toastr.css')}}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('toastr/toastr.css') }}">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3WbpntOgCD2SWENLdwRDY8sFQt3OEpIMcdCI1dN9eMOaOBLHs/" crossorigin="anonymous">
 
 </head>
 
@@ -30,21 +31,35 @@
         }
 
     @endphp
-    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container navbar-container">
             <div class="navbar-brand">
                 <a href="/">BABAYACHTING</a>
             </div>
 
-            <div class="collapse navbar-collapse justify-content-end">
-                <ul class="navbar-nav d-flex gap-3">
-                    @foreach ($pages as $page)
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{$page->page_seo_title}}">{{ myStrToUpper($page->page_title) }}</a>
-                        </li>
-                    @endforeach
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                </ul>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body justify-content-end">
+                    <ul class="navbar-nav">
+                        @foreach ($pages as $page)
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs($page->page_title) ? 'active' : '' }}"
+                                    href="/{{ $page->page_seo_title }}">{{ myStrToUpper($page->page_title) }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
+
