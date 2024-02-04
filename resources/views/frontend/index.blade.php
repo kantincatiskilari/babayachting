@@ -6,7 +6,8 @@
 @section('content')
     <section class="banner_section mb-5">
         <div class="main-image">
-            <img src="{{ asset('images/website-images') . '/' . $banner_image->image }}" alt="" class="img-fluid w-100">
+            <img src="{{ asset('images/website-images') . '/' . $banner_image->image }}" alt=""
+                class="img-fluid w-100">
         </div>
     </section>
 
@@ -22,7 +23,7 @@
                         <div class="article-wrapper position-relative">
                             <figure>
                                 <img src="{{ asset('images/custom-images/') . '/' . $recent_yacht->thumbnail_image }}"
-                                    alt="" class="img-fluid"/>
+                                    alt="" class="img-fluid" />
                                 <div class="trading-status bg-danger p-2 rounded">
                                     {{ $recent_yacht->trading_status == 1 ? 'Satılık' : ($recent_yacht->trading_status == 2 ? 'Kiralık' : 'Satıldı') }}
 
@@ -95,16 +96,16 @@
                                     @endforeach
                                 </div>
 
-                                    <a href="{{ route('tekne', ['slug' => $suggested_yacht->seo_title]) }}"
-                                        class="read-more mt-3">
-                                        Daha fazlası için <span class="sr-only"></span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20"
-                                            fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
+                                <a href="{{ route('tekne', ['slug' => $suggested_yacht->seo_title]) }}"
+                                    class="read-more mt-3">
+                                    Daha fazlası için <span class="sr-only"></span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20"
+                                        fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </a>
 
                             </div>
                         </div>
@@ -164,6 +165,16 @@
                 @endforeach
             </section>
 
+
         </div>
+    </section>
+    <section class="contact-section position-relative">
+        <img class="img-fluid" src="{{ asset('images/website-images/contact-dialogue.jpg') }}" alt="">
+        <div class="contact-text position-absolute text-align-center">Bizimle iletişime geç ve BABAYACHTING farkını keşfet.
+            <div class="mt-3 d-flex justify-content-center " style="width: 100%">
+                <a href="{{route('iletisim')}}" class="btn btn-primary ">BAŞVUR</a>
+            </div>
+        </div>
+
     </section>
 @endsection

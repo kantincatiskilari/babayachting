@@ -16,7 +16,7 @@ use App\Models\YachtTechincalSpecifications;
 
 class YachtPageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $yachts = Yacht::where('status', 1)->get();
         $banner_image = BannerImage::find(3);
@@ -27,7 +27,36 @@ class YachtPageController extends Controller
             ->with('yachtType:id,type_name') // Yat tipi adını ekleyin
             ->groupBy('yacht_type_id')
             ->get();
-        return view('frontend.pages.yachts', compact('yachts', 'banner_image', 'user', 'pages', 'selectedSpecifications', 'yachtCountsByType'));
+        $tradingStatus = $request->trading_status;
+        if ($tradingStatus) {
+            switch ($request->trading_status) {
+                case "1":
+                    $yachts = Yacht::where('trading_status', "1")->get(); // first() yerine get() kullanılmalı
+                    break;
+                case "2":
+                    $yachts = Yacht::where('trading_status', "2")->get(); // first() yerine get() kullanılmalı
+                    break;
+                case "3":
+                    $yachts = Yacht::where('trading_status', "3")->get();
+                    break;
+                case "4":
+                    $yachts = Yacht::orderBy('created_at', 'desc')->get();
+                    break;
+                case "5":
+                    $yachts = Yacht::orderBy('created_at', 'asc')->get();
+                    break;
+                case "6":
+                    $yachts = Yacht::where('is_recommended', '1')->get();
+                    break;
+                default:
+                    $yachts = Yacht
+                        ::orderBy('view', 'desc')
+                        ->get();
+                    break;
+            }
+        }
+
+        return view('frontend.pages.yachts', compact('yachts', 'banner_image', 'user', 'pages', 'selectedSpecifications', 'yachtCountsByType','tradingStatus'));
     }
 
     public function show($slug)

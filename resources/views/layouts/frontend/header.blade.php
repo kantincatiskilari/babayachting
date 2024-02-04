@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -16,7 +17,13 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('toastr/toastr.css') }}">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3WbpntOgCD2SWENLdwRDY8sFQt3OEpIMcdCI1dN9eMOaOBLHs/" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-MCw98/SFnGE8fJT3WbpntOgCD2SWENLdwRDY8sFQt3OEpIMcdCI1dN9eMOaOBLHs/" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&family=Roboto&display=swap" rel="stylesheet">
+
 
 </head>
 
@@ -53,7 +60,7 @@
                     <ul class="navbar-nav">
                         @foreach ($pages as $page)
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs($page->page_title) ? 'active' : '' }}"
+                                <a class="nav-link {{ request()->routeIs($page->page_seo_title) ? 'active' : '' }}"
                                     href="/{{ $page->page_seo_title }}">{{ myStrToUpper($page->page_title) }}</a>
                             </li>
                         @endforeach
@@ -62,4 +69,3 @@
             </div>
         </div>
     </nav>
-

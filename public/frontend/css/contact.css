@@ -96,3 +96,27 @@
 .button input[type="button"]:hover{
   background: #5029bc;
 }
+
+/* Büyük ekranlarda (lg ve üstü) */
+@media (min-width: 992px) {
+    .right-side {
+        margin-left: auto; /* Sağa yasla */
+        margin-right: 0; /* Diğer taraftan uzaklaştır */
+    }
+
+
+}
+
+/* Küçük ekranlarda (lg altı) */
+@media (max-width: 991px) {
+    .content {
+        flex-direction: column; /* Sıralı bir sütun haline getir */
+        align-items: center; /* Öğeleri ortala */
+    }
+
+    .right-side {
+        margin: 0 !important; /* Sağdan ve soldan boşlukları kaldır */
+        height: 100%;
+    }
+
+}

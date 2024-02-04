@@ -43,6 +43,10 @@ li {
     height: 100%;
 }
 
+.offcanvar{
+    text-align: center;
+}
+
 .container {
     color: inherit;
     letter-spacing: 1px;
@@ -69,8 +73,8 @@ li {
     color: rgb(78, 76, 76) !important;
 }
 
-.container .nav-link:hover {
-    color: rgb(165, 47, 56);
+.container .nav-link:hover,.container .nav-link.active  {
+    color: rgb(165, 47, 56) !important;
     transition: 0.5s ease all;
 }
 
@@ -235,8 +239,8 @@ li {
 
 .yacht_price {
     position: absolute;
-    right: 0;
-    bottom: 55%;
+    right: 10px;
+    top: 10px;
     padding: 10px;
     background-color: #0a547a !important;
     border-radius: 5px;
@@ -307,10 +311,29 @@ figure {
     padding: 0;
     aspect-ratio: 16 / 9;
     overflow: hidden;
+    width: 100%;
+}
+
+.yachts figure{
+    margin: 0;
+    padding: 0;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.yachts article img {
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    transform: scale(var(--img-scale));
+    transition: transform 0.4s ease-in-out;
 }
 
 article img {
     max-width: 100%;
+    height: 100%;
     transform-origin: center;
     transform: scale(var(--img-scale));
     transition: transform 0.4s ease-in-out;
@@ -451,8 +474,19 @@ td, th {
 	font-size: 18px;
 	}
 
-/*
-Max width before this PARTICULAR table gets nasty
-This query will take effect for any screen smaller than 760px
-and also iPads specifically.
-*/
+
+.contact-section img{
+    width: 99.1vw;
+    height: 700px;
+    object-fit: cover;
+    filter: brightness(50%);
+}
+
+.contact-section .contact-text{
+    top: 45%;
+    left: 15%;
+    color: #f4f4f4;
+    font-size: 1.5rem;
+    font-family: 'Montserrat Alternates', sans-serif;
+
+}

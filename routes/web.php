@@ -27,13 +27,14 @@ Route::get('/sitemap.xml', [SitemapController::class,'index'])->name('sitemap');
 
 //Frontend
 Route::get('/',[HomepageController::class,'index'])->name('anasayfa');
-Route::get('/anasayfa',[HomepageController::class,'index']);
+Route::get('/anasayfa',[HomepageController::class,'index'])->name('anasayfa');
 Route::get('/hakkimizda',[AboutController::class,'index'])->name('hakkimizda');
 Route::get('/tekneler',[YachtPageController::class,'index'])->name('tekneler');
 Route::get('/sikca-sorulan-sorular',[FaqPageController::class,'index'])->name('sikca-sorulan-sorular');
 Route::get('/iletisim',[ContactPageController::class,'index'])->name('iletisim');
 Route::post('/iletisim/gonder',[ContactPageController::class,'store'])->name('iletisim-gonder');
 Route::get('/tekne/{slug}',[YachtPageController::class,'show'])->name('tekne');
+Route::post("/tekneler",[YachtPageController::class,'index'])->name('tekne-filtrele');
 
 
 //Auth
