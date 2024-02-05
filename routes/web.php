@@ -35,6 +35,7 @@ Route::get('/iletisim',[ContactPageController::class,'index'])->name('iletisim')
 Route::post('/iletisim/gonder',[ContactPageController::class,'store'])->name('iletisim-gonder');
 Route::get('/tekne/{slug}',[YachtPageController::class,'show'])->name('tekne');
 Route::post("/tekneler",[YachtPageController::class,'index'])->name('tekne-filtrele');
+Route::get("/tekne-ara",[YachtPageController::class,'search'])->name('tekne-ara');
 
 
 //Auth
