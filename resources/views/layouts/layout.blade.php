@@ -87,6 +87,8 @@
                         <a class="collapse-item" href="{{route('admin.hakkimizda')}}">Hakkımızda</a>
                         <a class="collapse-item" href="{{route('admin.s.s.s')}}">S.S.S</a>
                         <a class="collapse-item" href="{{route('admin.iletisim')}}">İletişim</a>
+                        <a class="collapse-item" href="{{route('admin.kullanim-sartlari')}}">Kullanım Şartları</a>
+                        <a class="collapse-item" href="{{route('admin.gizlilik-ve-politika')}}">Gizlilik ve Politika</a>
                     </div>
 
                 </div>

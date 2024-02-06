@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\Frontend\AboutController;
+use App\Http\Controllers\Frontend\TermsController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Frontend\FaqPageController;
 use App\Http\Controllers\Frontend\HomepageController;
@@ -14,12 +16,14 @@ use App\Http\Controllers\Admin\Pages\AdminFaqController;
 use App\Http\Controllers\Frontend\ContactPageController;
 use App\Http\Controllers\Admin\Settings\BannerController;
 use App\Http\Controllers\Admin\Pages\AdminAboutController;
+use App\Http\Controllers\Admin\Pages\AdminTermsController;
 use App\Http\Controllers\Admin\Pages\AdminContactController;
+use App\Http\Controllers\Admin\Pages\AdminPrivacyController;
 use App\Http\Controllers\Admin\Specifications\TypeController;
 use App\Http\Controllers\Admin\Profile\AdminProfileController;
 use App\Http\Controllers\Admin\Specifications\ElectronicController;
 use App\Http\Controllers\Admin\Specifications\TechnicalSpecifications;
-use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\Frontend\PrivacyPolicyController;
 
 //Sitemap
 Route::get('/sitemap.xml', [SitemapController::class,'index'])->name('sitemap');
@@ -36,6 +40,8 @@ Route::post('/iletisim/gonder',[ContactPageController::class,'store'])->name('il
 Route::get('/tekne/{slug}',[YachtPageController::class,'show'])->name('tekne');
 Route::post("/tekneler",[YachtPageController::class,'index'])->name('tekne-filtrele');
 Route::get("/tekne-ara",[YachtPageController::class,'search'])->name('tekne-ara');
+Route::get("/kullanim-sartlari",[TermsController::class,'index'])->name('kullanim-sartlari');
+Route::get("/gizlilik-ve-politika",[PrivacyPolicyController::class,'index'])->name('gizlilik-ve-politika');
 
 
 //Auth
@@ -92,6 +98,10 @@ Route::group(['middleware' => 'auth.user', 'as' => 'admin.', 'prefix' => 'admin'
     //Sayfalar
     Route::get('/hakkimizda',[AdminAboutController::class,'index'])->name('hakkimizda');
     Route::post('/hakkimizda/ekle',[AdminAboutController::class,'store'])->name('hakkimizda-ekle');
+    Route::get('/kullanim-sartlari',[AdminTermsController::class,'index'])->name('kullanim-sartlari');
+    Route::post('/kullanim-sartlari/ekle',[AdminTermsController::class,'store'])->name('kullanim-sartlari-ekle');
+    Route::get('/gizlilik-ve-politika',[AdminPrivacyController::class,'index'])->name('gizlilik-ve-politika');
+    Route::post('/gizlilik-ve-politika/ekle',[AdminPrivacyController::class,'store'])->name('gizlilik-ve-politika-ekle');
     Route::get('/sikca-sorulan-sorular',[AdminFaqController::class,'index'])->name('s.s.s');
     Route::post('/update-faq-status',[AdminFaqController::class,'updateStatus']);
     Route::post('/sikca-sorulan-sorular/ekle',[AdminFaqController::class,'store'])->name('s.s.s-ekle');

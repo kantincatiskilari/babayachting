@@ -32,6 +32,12 @@
     }
 }
 
+@media screen and (max-width: 992px) {
+    .contact-text{
+        left: 5% !important;
+    }
+}
+
 @container card (min-width: 380px) {
     .article-wrapper {
         display: grid;
@@ -51,4 +57,15 @@
         aspect-ratio: 1;
         object-fit: cover;
     }
+}
+
+@media screen and (max-width: 992px) {
+    .slick-slider{
+        height: 300px;
+    }
+
+    .slider-item img{
+        height: 300px !important;
+    }
+
 }

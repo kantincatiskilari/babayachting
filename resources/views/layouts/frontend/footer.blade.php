@@ -30,27 +30,27 @@
                     <ul class="d-flex gap-3">
                         <div class="upper-footer-pages-left d-flex flex-column gap-2">
                             <li>
-                                <a href="">Anasayfa</a>
+                                <a href="{{route('anasayfa')}}">Anasayfa</a>
                             </li>
                             <li>
-                                <a href="">Hakkımızda</a>
+                                <a href="{{route('hakkimizda')}}">Hakkımızda</a>
                             </li>
                             <li>
-                                <a href="">Tüm Tekneler</a>
+                                <a href="{{route('tekneler')}}">Tüm Tekneler</a>
                             </li>
                             <li>
-                                <a href="">S.S.S</a>
+                                <a href="{{route('sikca-sorulan-sorular')}}">S.S.S</a>
                             </li>
                         </div>
                         <div class="upper-footer-pages-right d-flex flex-column gap-2">
                             <li>
-                                <a href="">Kullanım Koşulları</a>
+                                <a href="{{route('kullanim-sartlari')}}">Kullanım Koşulları</a>
                             </li>
                             <li>
-                                <a href="">Gizlilik ve Politika</a>
+                                <a href="{{route('gizlilik-ve-politika')}}">Gizlilik ve Politika</a>
                             </li>
                             <li>
-                                <a href="">İletişim</a>
+                                <a href="{{route('iletisim')}}">İletişim</a>
                             </li>
                         </div>
 

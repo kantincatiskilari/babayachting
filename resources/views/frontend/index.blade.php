@@ -74,7 +74,7 @@
 
                             <figure>
                                 <img src="{{ asset('images/custom-images/') . '/' . $suggested_yacht->thumbnail_image }}"
-                                    alt="" />
+                                    alt="" class="img-fluid"/>
                                 <div class="trading-status bg-danger p-2 rounded">
                                     {{ $suggested_yacht->trading_status == 1 ? 'Satılık' : ($suggested_yacht->trading_status == 2 ? 'Kiralık' : 'Satıldı') }}
 
@@ -128,7 +128,7 @@
 
                             <figure>
                                 <img src="{{ asset('images/custom-images/') . '/' . $sold_yacht->thumbnail_image }}"
-                                    alt="" />
+                                    alt="" class="img-fluid"/>
                                 <div class="trading-status bg-danger p-2 rounded">
                                     Satıldı
                                 </div>
@@ -169,7 +169,7 @@
         </div>
     </section>
     <section class="contact-section position-relative">
-        <img class="img-fluid" src="{{ asset('images/website-images/contact-dialogue.jpg') }}" alt="">
+        <img class="img-fluid w-100" src="{{ asset('images/website-images/contact-dialogue.jpg') }}" alt="">
         <div class="contact-text position-absolute text-align-center">Bizimle iletişime geç ve BABAYACHTING farkını keşfet.
             <div class="mt-3 d-flex justify-content-center " style="width: 100%">
                 <a href="{{route('iletisim')}}" class="btn btn-primary ">BAŞVUR</a>

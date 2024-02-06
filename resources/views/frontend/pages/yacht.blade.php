@@ -19,7 +19,7 @@
                 @foreach ($yachtImages as $image)
                     <div class="slider-item">
                         <img src="{{ asset('images/custom-images/') . '/' . $image->image }}" alt=""
-                            class="img-fluid w-100">
+                            class="img-fluid w-100 h-100">
                     </div>
                 @endforeach
             </div>
