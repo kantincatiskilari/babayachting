@@ -19,7 +19,7 @@ class YachtPageController extends Controller
 {
     public function index(Request $request)
     {
-        $yachts = Yacht::where('status', 1)->get();
+        $yachts = Yacht::where('status', 1)->orderBy('id', 'asc')->paginate(10);
         $banner_image = BannerImage::find(3);
         $user = User::get()->first();
         $pages = Page::where('status', 1)->get();
@@ -34,27 +34,26 @@ class YachtPageController extends Controller
         if ($tradingStatus) {
             switch ($request->trading_status) {
                 case "1":
-                    $yachts = Yacht::where('trading_status', "1")->get(); // first() yerine get() kullanılmalı
+                    $yachts = Yacht::where('trading_status', "1")->paginate(10); // first() yerine get() kullanılmalı
                     break;
                 case "2":
-                    $yachts = Yacht::where('trading_status', "2")->get(); // first() yerine get() kullanılmalı
+                    $yachts = Yacht::where('trading_status', "2")->paginate(10); // first() yerine get() kullanılmalı
                     break;
                 case "3":
-                    $yachts = Yacht::where('trading_status', "3")->get();
+                    $yachts = Yacht::where('trading_status', "3")->paginate(10);
                     break;
                 case "4":
-                    $yachts = Yacht::orderBy('created_at', 'desc')->get();
+                    $yachts = Yacht::orderBy('created_at', 'desc')->paginate(10);
                     break;
                 case "5":
-                    $yachts = Yacht::orderBy('created_at', 'asc')->get();
+                    $yachts = Yacht::orderBy('created_at', 'asc')->paginate(10);
                     break;
                 case "6":
-                    $yachts = Yacht::where('is_recommended', '1')->get();
+                    $yachts = Yacht::where('is_recommended', '1')->paginate(10);
                     break;
                 default:
-                    $yachts = Yacht
-                        ::orderBy('view', 'desc')
-                        ->get();
+                    $yachts = Yacht::orderBy('view', 'desc')
+                        ->paginate(10);
                     break;
             }
         }
@@ -118,7 +117,7 @@ class YachtPageController extends Controller
             })->orderBy('id', 'asc');
         }
 
-        $yachts = $yachtQuery->get();
+        $yachts = $yachtQuery->orderBy('id', 'asc')->paginate(10);
 
 
 

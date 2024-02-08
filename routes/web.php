@@ -32,6 +32,7 @@ Route::get('/sitemap.xml', [SitemapController::class,'index'])->name('sitemap');
 //Frontend
 Route::get('/',[HomepageController::class,'index'])->name('anasayfa');
 Route::get('/anasayfa',[HomepageController::class,'index'])->name('anasayfa');
+Route::post('/arama-sonuclari',[HomepageController::class,'search'])->name('arama-sonuclari');
 Route::get('/hakkimizda',[AboutController::class,'index'])->name('hakkimizda');
 Route::get('/tekneler',[YachtPageController::class,'index'])->name('tekneler');
 Route::get('/sikca-sorulan-sorular',[FaqPageController::class,'index'])->name('sikca-sorulan-sorular');

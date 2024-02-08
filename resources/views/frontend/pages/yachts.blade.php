@@ -179,10 +179,11 @@
             </div>
 
         </div>
+        {{ $yachts->links('pagination.custom') }}
+       
         </div>
     </section>
 @endsection
-
 @section('javascript')
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="path/to/bootstrap.bundle.min.js"></script>

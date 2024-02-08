@@ -51,6 +51,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
+
+
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
@@ -66,8 +68,11 @@
                                     href="/{{ $page->page_seo_title }}">{{ myStrToUpper($page->page_title) }}</a>
                             </li>
                         @endforeach
+
                     </ul>
                 </div>
             </div>
         </div>
+
     </nav>
+
