@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Profile;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\GeneralSettings;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -14,6 +15,7 @@ class AdminProfileController extends Controller
     public function show()
     {
         $user = Auth::user();
+
         return view('admin.profile.show', compact('user'));
     }
 

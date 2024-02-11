@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Admin\Pages;
 
-use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Models\GeneralSettings;
+use App\Http\Controllers\Controller;
 
 class AdminContactController extends Controller
 {
     public function index()
     {
         $contacts = Contact::all();
+
         return view('admin.pages.contact', compact('contacts'));
     }
 

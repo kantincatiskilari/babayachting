@@ -210,6 +210,5 @@
                 <a href="{{ route('iletisim') }}" class="btn btn-primary ">BAŞVUR</a>
             </div>
         </div>
-
     </section>
 @endsection

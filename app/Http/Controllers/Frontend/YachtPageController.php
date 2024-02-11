@@ -19,7 +19,7 @@ class YachtPageController extends Controller
 {
     public function index(Request $request)
     {
-        $yachts = Yacht::where('status', 1)->orderBy('id', 'asc')->paginate(10);
+        $yachts = Yacht::where('status', 1)->orderBy('id', 'desc')->paginate(10);
         $banner_image = BannerImage::find(3);
         $user = User::get()->first();
         $pages = Page::where('status', 1)->get();
@@ -114,10 +114,10 @@ class YachtPageController extends Controller
         } else {
             $yachtQuery = $yachtQuery->whereDoesntHave('electronicSystems', function ($query) use ($sortArry) {
                 $query->whereIn('system_id', $sortArry);
-            })->orderBy('id', 'asc');
+            })->orderBy('id', 'desc');
         }
 
-        $yachts = $yachtQuery->orderBy('id', 'asc')->paginate(10);
+        $yachts = $yachtQuery->orderBy('id', 'desc')->paginate(10);
 
 
 

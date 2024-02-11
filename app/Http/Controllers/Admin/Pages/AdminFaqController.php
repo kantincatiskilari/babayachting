@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Admin\Pages;
 
-use App\Http\Controllers\Controller;
 use App\Models\Faq;
 use Illuminate\Http\Request;
+use App\Models\GeneralSettings;
+use App\Http\Controllers\Controller;
 
 class AdminFaqController extends Controller
 {
     public function index()
     {
         $FAQs = Faq::all();
+
         return view('admin.pages.faq', compact('FAQs'));
     }
 

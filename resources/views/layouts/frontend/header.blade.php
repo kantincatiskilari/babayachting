@@ -8,6 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{{ asset('images/website-images/' . $settingsData['favicon']) }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
@@ -43,7 +45,13 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container navbar-container">
             <div class="navbar-brand">
-                <a href="/">BABAYACHTING</a>
+                <a href="/">
+                    @if ($settingsData['header_logo'])
+                        <img src="{{ asset('images/website-images/' .  $settingsData['header_logo'] ) }}" alt="Logo">
+                    @else
+                        BABAYACHTING
+                    @endif
+                </a>
             </div>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -75,4 +83,3 @@
         </div>
 
     </nav>
-

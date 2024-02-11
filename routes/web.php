@@ -7,26 +7,27 @@ use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\TermsController;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Frontend\FaqPageController;
 use App\Http\Controllers\Frontend\HomepageController;
 use App\Http\Controllers\Admin\Yachts\YachtController;
 use App\Http\Controllers\Frontend\YachtPageController;
 use App\Http\Controllers\Admin\Settings\PageController;
 use App\Http\Controllers\Admin\Pages\AdminFaqController;
+use App\Http\Controllers\Admin\Settings\GeneralSettingsController;
 use App\Http\Controllers\Frontend\ContactPageController;
 use App\Http\Controllers\Admin\Settings\BannerController;
 use App\Http\Controllers\Admin\Pages\AdminAboutController;
 use App\Http\Controllers\Admin\Pages\AdminTermsController;
+use App\Http\Controllers\Frontend\PrivacyPolicyController;
 use App\Http\Controllers\Admin\Pages\AdminContactController;
 use App\Http\Controllers\Admin\Pages\AdminPrivacyController;
 use App\Http\Controllers\Admin\Specifications\TypeController;
 use App\Http\Controllers\Admin\Profile\AdminProfileController;
 use App\Http\Controllers\Admin\Specifications\ElectronicController;
 use App\Http\Controllers\Admin\Specifications\TechnicalSpecifications;
-use App\Http\Controllers\Frontend\PrivacyPolicyController;
 
-//Sitemap
-Route::get('/sitemap.xml', [SitemapController::class,'index'])->name('sitemap');
+
 
 
 //Frontend
@@ -44,16 +45,13 @@ Route::get("/tekne-ara",[YachtPageController::class,'search'])->name('tekne-ara'
 Route::get("/kullanim-sartlari",[TermsController::class,'index'])->name('kullanim-sartlari');
 Route::get("/gizlilik-ve-politika",[PrivacyPolicyController::class,'index'])->name('gizlilik-ve-politika');
 
-
 //Auth
 Route::get("/admin/login", [AuthController::class, 'showLogin'])->name('login');
 Route::post('/admin/login', [AuthController::class, 'login']);
 
 //Admin
 Route::group(['middleware' => 'auth.user', 'as' => 'admin.', 'prefix' => 'admin'], function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
     Route::get('/profil',[AdminProfileController::class, 'show'])->name('profil');
     Route::post('/profil-guncelle',[AdminProfileController::class,'update'])->name('profil-guncelle');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -90,6 +88,8 @@ Route::group(['middleware' => 'auth.user', 'as' => 'admin.', 'prefix' => 'admin'
     Route::delete('elektronik-sil/{id}', [ElectronicController::class, 'delete']);
 
     //Ayarlar
+    Route::get("/genel-ayarlar",[GeneralSettingsController::class,'index'])->name('genel-ayarlar');
+    Route::get("/genel-ayarlar/guncelle",[GeneralSettingsController::class,'edit'])->name('genel-ayarlar-guncelle');
     Route::get('/banner-resimleri',[BannerController::class,'index'])->name('banner-resimleri');
     Route::post('/banner-resmi/guncelle/{id}',[BannerController::class,'store'])->name('banner-resmi-guncelle');
     Route::get('/sayfalar',[PageController::class,'index'])->name('sayfalar');

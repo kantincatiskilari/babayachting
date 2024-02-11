@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Admin\Pages;
 
-use App\Http\Controllers\Controller;
-use App\Models\PrivacyPolicy;
 use Illuminate\Http\Request;
+use App\Models\PrivacyPolicy;
+use App\Models\GeneralSettings;
+use App\Http\Controllers\Controller;
 
 class AdminPrivacyController extends Controller
 {
     public function index()
     {
         $privacy = PrivacyPolicy::first() ?? "";
+
         return view('admin.pages.privacy_policy',compact('privacy'));
     }
 

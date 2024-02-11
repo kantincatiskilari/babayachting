@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\BannerImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\GeneralSettings;
 use App\Models\Term;
 
 class TermsController extends Controller
@@ -16,6 +17,7 @@ class TermsController extends Controller
         $user = User::get()->first();
         $pages = Page::where('status', 1)->get();
         $terms = Term::first();
-        return view('frontend.pages.terms', compact('user', 'pages', 'terms'));
+        $generalSettings = GeneralSettings::get()->first();
+        return view('frontend.pages.terms', compact('user', 'pages', 'terms','generalSettings'));
     }
 }

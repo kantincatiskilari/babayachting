@@ -7,7 +7,7 @@
 @section('content')
     <section class="banner_section mb-5">
         <div class="banner-image position-relative">
-            <img src="{{ asset('images/website-images/terms.jpg') }}" alt="">
+            <img src="{{ asset('images/website-images/'.$generalSettings->terms_image) }}" alt="">
             <div class="position-absolute banner-text">KULLANIM KOŞULLARI</div>
         </div>
     </section>

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin\Settings;
 
 use App\Models\Page;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\BannerImage;
+use Illuminate\Http\Request;
+use App\Models\GeneralSettings;
+use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 
 class BannerController extends Controller
@@ -14,6 +15,7 @@ class BannerController extends Controller
     {
         $banners = BannerImage::all();
         $pages = Page::where('status',1)->get();
+
         return view('admin.settings.banner_images', compact('pages','banners'));
     }
 

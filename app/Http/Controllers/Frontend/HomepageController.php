@@ -9,6 +9,7 @@ use App\Models\BannerImage;
 use Illuminate\Http\Request;
 use App\Models\ElectronicSystems;
 use App\Http\Controllers\Controller;
+use App\Models\GeneralSettings;
 use Illuminate\Foundation\Auth\User;
 use App\Models\YachtTechincalSpecifications;
 
@@ -19,16 +20,17 @@ class HomepageController extends Controller
         $user = User::get()->first();
         $pages = Page::where('status', 1)->get();
         $banner_image = BannerImage::find(1);
-        $recent_yachts = Yacht::orderBy('created_at', 'asc')->where('status', 1)->paginate(12);
-        $suggested_yachts = Yacht::where('is_recommended', 1)
+        $recent_yachts = Yacht::orderBy('created_at', 'desc')->where('status', 1)->paginate(12);
+        $suggested_yachts = Yacht::orderBy('created_at', 'desc')->where('is_recommended', 1)
             ->where('status', 1)
             ->limit(6)
             ->get();
-        $sold_yachts = Yacht::where('trading_status', 3)->get();
+        $sold_yachts = Yacht::orderBy('created_at','desc')->where('trading_status', 3)->get();
 
         $selectedSpecifications = YachtTechincalSpecifications::whereIn('specification_id', [4, 5, 6, 7])->get();
         $yacht_types = YachtTypes::all();
-        return view('frontend.index', compact('user', 'pages', 'banner_image', 'recent_yachts', 'selectedSpecifications', 'suggested_yachts', 'sold_yachts', 'yacht_types'));
+        $generalSettings = GeneralSettings::get()->first();
+        return view('frontend.index', compact('user', 'pages', 'banner_image', 'recent_yachts', 'selectedSpecifications', 'suggested_yachts', 'sold_yachts', 'yacht_types','generalSettings'));
     }
 
     public function search(Request $request)
@@ -43,7 +45,7 @@ class HomepageController extends Controller
             $query->where('title', 'like', '%' . $request->search_yacht . '%');
         }
 
-        $query->where('status', 1);
+        $query->where('status', 1)->orderBy('id','desc');
 
         $yachts = $query->paginate(10);
 

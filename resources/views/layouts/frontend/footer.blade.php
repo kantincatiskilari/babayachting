@@ -1,5 +1,4 @@
 <div class="content">
-
 </div>
 
 <footer class="footer">
@@ -7,7 +6,14 @@
         <div class="footer-container container d-flex flex-column flex-md-row justify-content-between">
             <div class="upper-footer-left">
                 <div class="upper-footer-logo mb-5">
-                    <a href="/">BABAYACHTING</a>
+                    <a href="/">
+                        @if ($settingsData['footer_logo'])
+                            <img src="{{ asset('images/website-images/' . $settingsData['footer_logo']) }}"
+                                alt="Logo">
+                        @else
+                            BABAYACHTING
+                        @endif
+                    </a>
                 </div>
                 <div class="upper-footer-addresses">
                     <div class="footer-address-item text-white">
@@ -30,27 +36,27 @@
                     <ul class="d-flex gap-3">
                         <div class="upper-footer-pages-left d-flex flex-column gap-2">
                             <li>
-                                <a href="{{route('anasayfa')}}">Anasayfa</a>
+                                <a href="{{ route('anasayfa') }}">Anasayfa</a>
                             </li>
                             <li>
-                                <a href="{{route('hakkimizda')}}">Hakkımızda</a>
+                                <a href="{{ route('hakkimizda') }}">Hakkımızda</a>
                             </li>
                             <li>
-                                <a href="{{route('tekneler')}}">Tüm Tekneler</a>
+                                <a href="{{ route('tekneler') }}">Tüm Tekneler</a>
                             </li>
                             <li>
-                                <a href="{{route('sikca-sorulan-sorular')}}">S.S.S</a>
+                                <a href="{{ route('sikca-sorulan-sorular') }}">S.S.S</a>
                             </li>
                         </div>
                         <div class="upper-footer-pages-right d-flex flex-column gap-2">
                             <li>
-                                <a href="{{route('kullanim-sartlari')}}">Kullanım Koşulları</a>
+                                <a href="{{ route('kullanim-sartlari') }}">Kullanım Koşulları</a>
                             </li>
                             <li>
-                                <a href="{{route('gizlilik-ve-politika')}}">Gizlilik ve Politika</a>
+                                <a href="{{ route('gizlilik-ve-politika') }}">Gizlilik ve Politika</a>
                             </li>
                             <li>
-                                <a href="{{route('iletisim')}}">İletişim</a>
+                                <a href="{{ route('iletisim') }}">İletişim</a>
                             </li>
                         </div>
 
@@ -96,9 +102,10 @@
 </html>
 
 <!-- Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+</script>
 <!--jquery -->
 <script src="{{ asset('backend/vendor/jquery/jquery.min.js') }}"></script>
 <!-- Script -->
-<script src="{{asset('frontend/js/script.js')}}"></script>
+<script src="{{ asset('frontend/js/script.js') }}"></script>
 @yield('javascript')

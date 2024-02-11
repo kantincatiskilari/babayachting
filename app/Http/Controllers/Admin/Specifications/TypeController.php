@@ -12,6 +12,7 @@ class TypeController extends Controller
     public function index()
     {
         $types = YachtTypes::get();
+        
         return view('admin.specifications.types.index', compact('types'));
     }
 

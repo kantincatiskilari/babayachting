@@ -48,7 +48,15 @@
                                     <td>{{ $yacht->title }}</td>
                                     <td>{{ $yacht->price }}{{ $yacht->currency }}</td>
                                     <td>{{ $yacht->yachtType->type_name }}</td>
-                                    <td>{{ $yacht->trading_status == 1 ? 'Satılık' : 'Kiralık' }}</td>
+                                    <td>
+                                        @if ($yacht->trading_status == 1)
+                                            Satılık
+                                        @elseif ($yacht->trading_status == 2)
+                                            Kiralık
+                                        @elseif ($yacht->trading_status == 3)
+                                            Satıldı
+                                        @endif
+                                    </td>
                                     <td>{{ $yacht->view }}</td>
                                     <td>
                                         <div class="form-check form-switch">

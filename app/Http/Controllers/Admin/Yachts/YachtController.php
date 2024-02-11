@@ -19,7 +19,7 @@ class YachtController extends Controller
 {
     public function index()
     {
-        $yachts = Yacht::all();
+        $yachts = Yacht::orderBy('created_at','desc')->get();
         return view('admin.yachts.index', compact('yachts'));
     }
 

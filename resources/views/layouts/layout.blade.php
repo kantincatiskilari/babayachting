@@ -32,7 +32,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Başlıklar
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -68,10 +68,9 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{route('admin.genel-ayarlar')}}">Genel Ayarlar</a>
                         <a class="collapse-item" href="{{route('admin.banner-resimleri')}}">Banner Resimleri</a>
                         <a class="collapse-item" href="{{route('admin.sayfalar')}}">Sayfalar</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
             </li>
@@ -86,7 +85,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('admin.hakkimizda')}}">Hakkımızda</a>
                         <a class="collapse-item" href="{{route('admin.s.s.s')}}">S.S.S</a>
-                        <a class="collapse-item" href="{{route('admin.iletisim')}}">İletişim</a>
                         <a class="collapse-item" href="{{route('admin.kullanim-sartlari')}}">Kullanım Şartları</a>
                         <a class="collapse-item" href="{{route('admin.gizlilik-ve-politika')}}">Gizlilik ve Politika</a>
                     </div>
@@ -100,9 +98,9 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="{{route('admin.iletisim')}}">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                    <span>İletişim</span></a>
             </li>
 
             <!-- Nav Item - Tables -->

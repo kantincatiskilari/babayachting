@@ -101,7 +101,7 @@
                 </div>
                 <div class="col-lg-4 col-12">
                     <section class="articles">
-                        <h3 class="text-center" style="color: rgb(16, 2, 66)">TAVSİYE ETTİKLERİMİZ</h3>
+                        <h3 class="text-center suggestion-title" style="color: rgb(16, 2, 66)">TAVSİYE ETTİKLERİMİZ</h3>
                         @foreach ($recommendedYachts as $recent_yacht)
                             <article>
                                 <div class="article-wrapper position-relative">

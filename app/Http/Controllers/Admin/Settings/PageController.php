@@ -12,6 +12,7 @@ class PageController extends Controller
     public function index()
     {
         $pages = Page::all();
+        
         return view('admin.settings.pages', compact('pages'));
     }
 

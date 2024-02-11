@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <img src="{{asset('images/website-images/about.jpeg')}}" alt="" style="width: 100%; height: 90%; object-fit:cover">
+                    <img src="{{asset('images/website-images/'. $generalSettings->about_image)}}" alt="" style="width: 100%; height: 90%; object-fit:cover">
                 </div>
                 <div class="col-md-8">
                     {!!$about->about_text!!}
