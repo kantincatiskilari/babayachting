@@ -3,14 +3,13 @@
     {{ $yacht->title }}
 @endsection
 
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+
 
 @section('content')
     <section class="banner_section mb-5">
         <div class="banner-image position-relative">
             <img src="{{ asset('images/custom-images') . '/' . $yacht->banner_image }}" alt="">
-            <div class="position-absolute banner-text">{{ $yacht->title }}</div>
+            <div class="position-absolute banner-text text-center">{{ $yacht->title }}</div>
         </div>
     </section>
     <section class="yacht-section mb-5">
@@ -149,8 +148,7 @@
 @endsection
 
 @section('javascript')
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    
     <script>
         $(document).ready(function() {
             $('.slider').slick({

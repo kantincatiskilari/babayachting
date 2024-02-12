@@ -26,4 +26,14 @@ class Yacht extends Model
     {
         return $this->hasMany(YachtImages::class);
     }
+
+    public function setPriceAttribute($value)
+    {
+        $this->attributes['price'] = str_replace(',', '', $value);
+    }
+
+    public function getPriceAttribute($value)
+    {
+        return number_format($value, 0, ',', '.');
+    }
 }

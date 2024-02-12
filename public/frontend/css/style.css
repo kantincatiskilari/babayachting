@@ -198,6 +198,11 @@ li {
 
 .banner-image {
     position: relative;
+
+}
+
+.banner-image img{
+    filter: brightness(0.5); /* 50% parlaklık */
 }
 
 .banner-title {
@@ -716,7 +721,7 @@ th {
     display: none; /* Sayfanın en üstünde değilken butonu gizle */
     position: fixed;
     bottom: 30px;
-    right: 100px;
+    right: 70px;
     z-index: 99;
     font-size: 18px;
     border: none;
@@ -771,3 +776,5 @@ th {
 {
     background-color:#3b60c4;
 }
+
+

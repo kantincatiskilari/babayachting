@@ -30,14 +30,11 @@
 <!-- Datatables -->
 <script src="{{ asset('backend/vendor/DataTables/datatables.js') }}"></script>
 
-<!--Bootstrap ve Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 <!--Toastr -->
 <script src="{{asset('toastr/toastr.min.js')}}"></script>
 
 <!--Sweet Alert -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{asset('backend/vendor/sweetAlert/sweetAlert2@11.js')}}"></script>
 
 <!--Ckeditor -->
 <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>

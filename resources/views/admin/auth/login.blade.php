@@ -49,7 +49,8 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image" style="background: url({{asset('images/website-images/'.$entranceImage->entrance_image)}}); background-position: center;
+                                background-size: cover;"></div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
@@ -70,7 +71,7 @@
 
                                         <button type="submit" id="adminLoginButton"
                                             class="btn btn-primary btn-user btn-block">
-                                            Login
+                                            Giriş Yap
                                         </button>
                                     </form>
                                     <hr>

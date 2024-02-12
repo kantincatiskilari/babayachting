@@ -5,22 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="{{ isset($seo_text) ? $seo_text->meta_description : '' }}">
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="16x16"
         href="{{ asset('images/website-images/' . $settingsData['favicon']) }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap -->
+    <link href="{{ asset('backend/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <!-- Style -->
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css') }}" />
+    <!-- Responsive -->
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
+    <!-- Contact -->
+    <link rel="stylesheet" href="{{ asset('frontend/css/contact.css') }}">
+    <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('toastr/toastr.css') }}">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-MCw98/SFnGE8fJT3WbpntOgCD2SWENLdwRDY8sFQt3OEpIMcdCI1dN9eMOaOBLHs/" crossorigin="anonymous">
+    <!-- Slick -->
+    <link rel="stylesheet" type="text/css" href="{{asset('slick/slick.css')}}" />
+    <link rel="stylesheet" type="text/css"
+        href="{{asset('slick/slick-theme.css')}}" />
+
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&family=Roboto&display=swap"
@@ -47,7 +59,7 @@
             <div class="navbar-brand">
                 <a href="/">
                     @if ($settingsData['header_logo'])
-                        <img src="{{ asset('images/website-images/' .  $settingsData['header_logo'] ) }}" alt="Logo">
+                        <img src="{{ asset('images/website-images/' . $settingsData['header_logo']) }}" alt="Logo">
                     @else
                         BABAYACHTING
                     @endif

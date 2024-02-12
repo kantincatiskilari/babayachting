@@ -5,20 +5,22 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Page;
 use App\Models\User;
 use App\Models\Yacht;
+use App\Models\SeoTexts;
 use App\Models\YachtTypes;
 use App\Models\BannerImage;
+use App\Models\YachtImages;
 use Illuminate\Http\Request;
+use App\Models\ElectronicSystems;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\ElectronicSystems;
 use App\Models\YachtElectronicSystems;
-use App\Models\YachtImages;
 use App\Models\YachtTechincalSpecifications;
 
 class YachtPageController extends Controller
 {
     public function index(Request $request)
     {
+        $seo_text = SeoTexts::where('id',2)->first();
         $yachts = Yacht::where('status', 1)->orderBy('id', 'desc')->paginate(10);
         $banner_image = BannerImage::find(3);
         $user = User::get()->first();
@@ -58,7 +60,7 @@ class YachtPageController extends Controller
             }
         }
 
-        return view('frontend.pages.yachts', compact('yachts', 'banner_image', 'user', 'pages', 'selectedSpecifications', 'yachtCountsByType', 'tradingStatus', 'yachtTypes', 'electronicSystems'));
+        return view('frontend.pages.yachts', compact('yachts', 'banner_image', 'user', 'pages', 'selectedSpecifications', 'yachtCountsByType', 'tradingStatus', 'yachtTypes', 'electronicSystems','seo_text'));
     }
 
     public function show($slug)

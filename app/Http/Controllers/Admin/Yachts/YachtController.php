@@ -51,7 +51,7 @@ class YachtController extends Controller
             'title' => 'required|unique:yachts,title',
             'yacht_type_id' => 'required',
             'country' => 'required',
-            'price' => 'required|numeric',
+            'price' => 'required',
             'currency' => 'required',
             'description' => 'required',
             'is_recommended' => 'required',
@@ -91,7 +91,7 @@ class YachtController extends Controller
 
             // Resmi belirli bir klasöre kaydet
             $imagePath = public_path('images/custom-images/' . $imageName);
-            Image::make($image->getRealPath())->resize(1280, 768)->save($imagePath);
+            Image::make($image->getRealPath())->save($imagePath);
 
             $yacht->banner_image = $imageName;
         }
@@ -199,7 +199,7 @@ class YachtController extends Controller
             'title' => 'required',
             'yacht_type_id' => 'required',
             'country' => 'required',
-            'price' => 'required|numeric',
+            'price' => 'required',
             'trading_status' => 'required',
             'description' => 'required',
             'is_recommended' => 'required',
@@ -239,7 +239,7 @@ class YachtController extends Controller
 
             // Resmi belirli bir klasöre kaydet
             $imagePath = public_path('images/custom-images/' . $imageName);
-            Image::make($image->getRealPath())->resize(1280, 768)->save($imagePath);
+            Image::make($image->getRealPath())->save($imagePath);
 
             $yacht->banner_image = $imageName;
             if ($yacht->banner_image != null) {

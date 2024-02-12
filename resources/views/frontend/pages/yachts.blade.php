@@ -1,9 +1,8 @@
 @extends('layouts.frontend.layout')
 @section('title')
-    Tekneler
+    {{ isset($seo_text) ? $seo_text->page_title : "Arama sonuçları" }}
 @endsection
 
-<link rel="stylesheet" href="{{ asset('frontend/css/card.css') }}">
 @section('content')
     <section class="banner_section mb-5">
         <div class="banner-image position-relative">
@@ -180,13 +179,11 @@
 
         </div>
         {{ $yachts->links('pagination.custom') }}
-       
+
         </div>
     </section>
 @endsection
 @section('javascript')
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="path/to/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
             // Sayfa yüklendiğinde varsayılan olarak gridBtn aktif olsun

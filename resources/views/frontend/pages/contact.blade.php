@@ -1,16 +1,16 @@
 @extends('layouts.frontend.layout')
 @section('title')
-    İletişim
+{{$seo_text->page_title}}
 @endsection
 
 
-<link rel="stylesheet" href="{{ asset('frontend/css/contact.css') }}">
+
 
 @section('content')
     <section class="banner_section mb-5">
         <div class="banner-image position-relative">
             <img src="{{ asset('images/website-images') . '/' . $banner_image->image }}" alt="">
-            <div class="position-absolute banner-text">İletişim</div>
+            <div class="position-absolute banner-text">İLETİŞİM</div>
         </div>
     </section>
     <section class="contact-section mb-5">

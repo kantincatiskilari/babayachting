@@ -1,6 +1,6 @@
 @extends('layouts.frontend.layout')
 @section('title')
-    Anasayfa
+    {{$seo_text->page_title}}
 @endsection
 
 @section('content')
@@ -32,8 +32,6 @@
                             </ul>
                         </div>
                     </a>
-
-
                 </div>
                 <input type="hidden" name="yacht_type_id" id="yacht_type_id">
                 <input type="search" placeholder="Ne arıyorsunuz?" name="search_yacht">
@@ -120,7 +118,7 @@
                                 <h2 class="text-center">{{ $suggested_yacht->title }}</h2>
                                 <div class="card-body">
                                     @foreach ($selectedSpecifications as $specification)
-                                        @if ($specification->yacht_id == $recent_yacht->id)
+                                        @if ($specification->yacht_id == $suggested_yacht->id)
                                             <div class="d-flex justify-content-between">
                                                 <div class="my-2">
                                                     {{ $specification->specification->specification_name }}:</div>
@@ -146,6 +144,10 @@
                     </article>
                 @endforeach
             </section>
+            <div class="w-100">
+
+                {{ $suggested_yachts->links('pagination.custom') }}
+            </div>
         </div>
     </section>
 

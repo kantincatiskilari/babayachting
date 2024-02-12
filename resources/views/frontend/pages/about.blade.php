@@ -1,6 +1,6 @@
 @extends('layouts.frontend.layout')
 @section('title')
-    Hakkımızda
+{{$seo_text->page_title}}
 @endsection
 
 

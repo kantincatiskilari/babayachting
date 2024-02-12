@@ -9,8 +9,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center"
-                href="{{ route('admin.dashboard') }}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('anasayfa') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-ship"></i>
                 </div>
@@ -21,9 +20,9 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item {{ Route::is('admin.dashboard') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.dashboard') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-house"></i>
                     <span>Panel</span></a>
             </li>
 
@@ -36,7 +35,8 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li
+                class="nav-item {{ Route::is('admin.tekneler') | Route::is('admin.tekne-turleri') | Route::is('admin.teknik-ozellikler') | Route::is('admin.elektronik-sistemler') ? 'active' : '' }}">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-ship"></i>
@@ -59,34 +59,72 @@
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+            <li
+                class="nav-item {{ Route::is('admin.genel-ayarlar') | Route::is('admin.banner-resimleri') | Route::is('admin.sayfalar') ? 'active' : '' }}">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Ayarlar</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
+                <div id="collapseUtilities"
+                    class="collapse {{ Route::is('admin.genel-ayarlar') | Route::is('admin.banner-resimleri') | Route::is('admin.sayfalar') ? 'show' : '' }}"
+                    aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('admin.genel-ayarlar')}}">Genel Ayarlar</a>
-                        <a class="collapse-item" href="{{route('admin.banner-resimleri')}}">Banner Resimleri</a>
-                        <a class="collapse-item" href="{{route('admin.sayfalar')}}">Sayfalar</a>
+                        <a class="collapse-item {{ Route::is('admin.genel-ayarlar') ? 'active' : '' }}"
+                            href="{{ route('admin.genel-ayarlar') }}">Genel Ayarlar</a>
+                        <a class="collapse-item {{ Route::is('admin.banner-resimleri') ? 'active' : '' }}"
+                            href="{{ route('admin.banner-resimleri') }}">Banner Resimleri</a>
+                        <a class="collapse-item {{ Route::is('admin.sayfalar') ? 'active' : '' }}"
+                            href="{{ route('admin.sayfalar') }}">Sayfalar</a>
                     </div>
                 </div>
             </li>
-            <li class="nav-item">
+            <li
+                class="nav-item {{ Route::is('admin.hakkimizda') | Route::is('admin.s.s.s') | Route::is('admin.kullanim-sartlari') | Route::is('admin.gizlilik-ve-politika') ? 'active' : '' }}">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-globe"></i>
                     <span>Sayfalar</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
+                <div id="collapsePages"
+                    class="collapse {{ Route::is('admin.hakkimizda') | Route::is('admin.s.s.s') | Route::is('admin.kullanim-sartlari') | Route::is('admin.gizlilik-ve-politika') ? 'show' : '' }}"
+                    aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('admin.hakkimizda')}}">Hakkımızda</a>
-                        <a class="collapse-item" href="{{route('admin.s.s.s')}}">S.S.S</a>
-                        <a class="collapse-item" href="{{route('admin.kullanim-sartlari')}}">Kullanım Şartları</a>
-                        <a class="collapse-item" href="{{route('admin.gizlilik-ve-politika')}}">Gizlilik ve Politika</a>
+                        <a class="collapse-item {{ Route::is('admin.hakkimizda') ? 'active' : '' }}"
+                            href="{{ route('admin.hakkimizda') }}">Hakkımızda</a>
+                        <a class="collapse-item {{ Route::is('admin.s.s.s') ? 'active' : '' }}"
+                            href="{{ route('admin.s.s.s') }}">S.S.S</a>
+                        <a class="collapse-item {{ Route::is('admin.kullanim-sartlari') ? 'active' : '' }}"
+                            href="{{ route('admin.kullanim-sartlari') }}">Kullanım Şartları</a>
+                        <a class="collapse-item {{ Route::is('admin.gizlilik-ve-politika') ? 'active' : '' }}"
+                            href="{{ route('admin.gizlilik-ve-politika') }}">Gizlilik ve Politika</a>
+                    </div>
+
+                </div>
+            </li>
+
+            <li
+                class="nav-item {{ Route::is('admin.anasayfa-seo') | Route::is('admin.tekneler-seo') | Route::is('admin.sss-seo') | Route::is('admin.hakkimizda-seo') | Route::is('admin.iletisim-seo') ? 'active' : '' }}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSEO"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fab fa-searchengin"></i>
+                    <span>SEO Ayarları</span>
+                </a>
+                <div id="collapseSEO"
+                    class="collapse {{ Route::is('admin.anasayfa-seo') | Route::is('admin.tekneler-seo') | Route::is('admin.sss-seo') | Route::is('admin.hakkimizda-seo') | Route::is('admin.iletisim-seo') ? 'show' : '' }}"
+                    aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item {{ Route::is('admin.anasayfa-seo') ? 'active' : '' }}"
+                            href="{{ route('admin.anasayfa-seo') }}">Anasayfa</a>
+                        <a class="collapse-item {{ Route::is('admin.tekneler-seo') ? 'active' : '' }}"
+                            href="{{ route('admin.tekneler-seo') }}">Tekneler</a>
+                        <a class="collapse-item {{ Route::is('admin.sss-seo') ? 'active' : '' }}"
+                            href="{{ route('admin.sss-seo') }}">S.S.S</a>
+                        <a class="collapse-item {{ Route::is('admin.hakkimizda-seo') ? 'active' : '' }}"
+                            href="{{ route('admin.hakkimizda-seo') }}">Hakkımızda</a>
+                        <a class="collapse-item {{ Route::is('admin.iletisim-seo') ? 'active' : '' }}"
+                            href="{{ route('admin.iletisim-seo') }}">İletişim</a>
+
                     </div>
 
                 </div>
@@ -97,17 +135,10 @@
 
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('admin.iletisim')}}">
+            <li class="nav-item {{ Route::is('admin.iletisim') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.iletisim') }}">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>İletişim</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
             </li>
 
             <!-- Divider -->
@@ -172,20 +203,20 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->name}}</span>
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="{{ asset('images/website-images/'.Auth::user()->image) }}">
+                                    src="{{ asset('images/website-images/' . Auth::user()->image) }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{{route('admin.profil')}}">
+                                <a class="dropdown-item" href="{{ route('admin.profil') }}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profil
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{route('admin.logout')}}"
-                                    >
+                                <a class="dropdown-item" href="{{ route('admin.logout') }}">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Çıkış
                                 </a>
@@ -225,4 +256,3 @@
         <i class="fas fa-angle-up"></i>
     </a>
     @include('layouts.footer')
-

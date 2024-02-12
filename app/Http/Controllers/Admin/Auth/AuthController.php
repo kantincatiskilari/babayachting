@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\GeneralSettings;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function showLogin()
     {
-        return view('admin.auth.login');
+        $entranceImage = GeneralSettings::select('entrance_image')->first();
+
+        return view('admin.auth.login', compact('entranceImage'));
     }
     public function login(Request $request)
     {
