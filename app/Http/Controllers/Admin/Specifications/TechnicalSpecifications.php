@@ -47,7 +47,7 @@ class TechnicalSpecifications extends Controller
         }
 
         $technicalSpecification = new TechnicalSpecification;
-        $technicalSpecification->specification_name = $specificationName;
+        $technicalSpecification->specification_name = ucwords($specificationName);
         $technicalSpecification->status = $request->status;
         $technicalSpecification->specification_slug = Str::slug($specificationName);
         $technicalSpecification->save();

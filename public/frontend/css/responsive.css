@@ -143,3 +143,33 @@
         display: none;
     }
 }
+
+@media screen and (max-width: 992px) {
+    .footer-address-item {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .social-media-icons{
+        top: 45%;
+      }
+      .social-media-icon i{
+        font-size: 15px;
+      }
+      .social-media-icon{
+        height: 30px;
+        width: 30px;
+      }
+}
+
+@media screen and (max-width: 800px) {
+
+    .banner-image img{
+        height: 350px;
+    }
+    .banner-text{
+        bottom: 60%;
+        font-size: 30px;
+    }
+}

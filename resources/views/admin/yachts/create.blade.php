@@ -87,7 +87,7 @@
                     @foreach ($electronicSystems as $system)
                         <div>
                             <input value="{{ $system->id }}" type="checkbox" name="electronic_systems[]">
-                            <label class="mx-1" for="alarm">{{ $system->electronic_name }}</label>
+                            <label class="mx-1">{{ $system->electronic_name }}</label>
                         </div>
                     @endforeach
                 </div>
@@ -97,7 +97,7 @@
                     <h6 class="m-0 text-secondary fs-3">Teknik Özellikler</h6>
                 </div>
                 <div class="card-body">
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-4 form-group">
                         <label>Tekne Tipi</label>
                         <select name="yacht_type_id" class="form-select">
                             @foreach ($yachtTypes as $type)
@@ -106,18 +106,36 @@
                         </select>
                     </div>
 
-                    @foreach ($specifications as $specification)
-                        <div class="col-md-6 form-group">
+                    {{-- @foreach ($specifications as $specification)
+
+                        <div class="col-md-4 form-group">
                             <label class="mx-1">{{ $specification->specification_name }}</label>
                             <input type="text" class="form-control" name="specifications[]">
                             <input type="hidden" name="specification_ids[]" value="{{ $specification->id }}">
                         </div>
+                    @endforeach --}}
+                    @foreach ($specifications as $specification)
+                        <div class="col-md-4 form-group">
+                            <label class="mx-1">{{ $specification->specification_name }}</label>
+                            @if (in_array($specification->id, [2, 8, 11, 13, 19]))
+                                <select class="form-control" name="specifications[]">
+                                    @foreach ($selected_specifications->whereIn('specification_id', [$specification->id]) as $selected_specification)
+                                        <option value="{{ $selected_specification->specification_value }}">
+                                            {{ $selected_specification->specification_value }}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <input type="text" class="form-control" name="specifications[]">
+                            @endif
+                            <input type="hidden" name="specification_ids[]" value="{{ $specification->id }}">
+                        </div>
                     @endforeach
+
                 </div>
             </div>
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 text-secondary fs-3">Tekne Açıklama</h6>
+                    <h6 class="m-0 text-secondary fs-3">Tekne Açıklama<span class="text-danger">*</span></h6>
                 </div>
                 <div class="card-body">
                     <textarea name="description" class="ckeditor"></textarea>

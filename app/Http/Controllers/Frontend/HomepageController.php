@@ -29,7 +29,7 @@ class HomepageController extends Controller
             ;
         $sold_yachts = Yacht::orderBy('created_at','desc')->where('trading_status', 3)->get();
 
-        $selectedSpecifications = YachtTechincalSpecifications::whereIn('specification_id', [4, 5, 6, 7])->get();
+        $selectedSpecifications = YachtTechincalSpecifications::whereIn('specification_id', [7, 1, 9, 5])->get();
         $yacht_types = YachtTypes::all();
         $generalSettings = GeneralSettings::get()->first();
         return view('frontend.index', compact('user', 'pages', 'banner_image', 'recent_yachts', 'selectedSpecifications', 'suggested_yachts', 'sold_yachts', 'yacht_types','generalSettings','seo_text'));
@@ -59,7 +59,7 @@ class HomepageController extends Controller
         $pages = Page::where('status', 1)->get();
         $yachtTypes = YachtTypes::all();
         $electronicSystems = ElectronicSystems::where('status', 1)->get();
-        $selectedSpecifications = YachtTechincalSpecifications::whereIn('specification_id', [4, 5, 6, 7])->get();
+        $selectedSpecifications = YachtTechincalSpecifications::whereIn('specification_id', [7, 1, 9, 5])->get();
         $tradingStatus = $request->trading_status;
 
         return view('frontend.pages.yachts', compact('yachts', 'banner_image', 'user', 'pages', 'selectedSpecifications', 'tradingStatus', 'yachtTypes', 'electronicSystems'));

@@ -115,7 +115,7 @@
                     <h6 class="m-0 text-secondary fs-3">Teknik Özellikler</h6>
                 </div>
                 <div class="card-body">
-                    <div class="col-md-6 form-group">
+                    <div class="col-md-4 form-group">
                         <label>Tekne Tipi</label>
                         <select name="yacht_type_id" class="form-select">
                             @foreach ($yachtTypes as $type)
@@ -126,14 +126,33 @@
                         </select>
                     </div>
 
-                    @foreach ($specifications as $specification)
+                    {{-- @foreach ($specifications as $specification)
                         <div class="col-md-6 form-group">
                             <label class="mx-1">{{ $specification->specification_name }}</label>
                             <input type="text" class="form-control" name="specifications[]"
                                 value="{{ $yacht->specifications->contains('specification_id', $specification->id) ? $yacht->specifications->where('specification_id', $specification->id)->first()->specification_value : '' }}">
                             <input type="hidden" name="specification_ids[]" value="{{ $specification->id }}">
                         </div>
+                    @endforeach --}}
+
+                    @foreach ($specifications as $specification)
+                        <div class="col-md-4 form-group">
+                            <label class="mx-1">{{ $specification->specification_name }}</label>
+                            @if (in_array($specification->id, [2, 8, 11, 13, 19]))
+                                <select class="form-control" name="specifications[]">
+                                    @foreach ($selected_specifications->whereIn('specification_id', [$specification->id]) as $selected_specification)
+                                        <option {{$yacht->specifications->contains('specification_value',$selected_specification->specification_value) ? 'selected' : ''}} value="{{ $selected_specification->specification_value }}">
+                                            {{ $selected_specification->specification_value }}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <input type="text" class="form-control" name="specifications[]"
+                                    value="{{ $yacht->specifications->contains('specification_id', $specification->id) ? $yacht->specifications->where('specification_id', $specification->id)->first()->specification_value : '' }}">
+                            @endif
+                            <input type="hidden" name="specification_ids[]" value="{{ $specification->id }}">
+                        </div>
                     @endforeach
+
                 </div>
             </div>
             <div class="card shadow mb-4">

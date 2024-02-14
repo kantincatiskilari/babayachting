@@ -128,7 +128,7 @@ $(document).ready(function () {
 
                 setTimeout(function () {
                     location.reload();
-                }, 3000);
+                }, 1000);
             },
             error: function () {},
         });
@@ -351,7 +351,7 @@ $(document).ready(function () {
 
                 setTimeout(function () {
                     location.reload();
-                }, 3000);
+                }, 1000);
             },
             error: function () {},
         });
@@ -386,7 +386,7 @@ $(document).ready(function () {
 
                 setTimeout(function () {
                     location.reload();
-                }, 3000);
+                }, 1000);
             },
             error: function () {},
         });
@@ -422,7 +422,7 @@ $(document).ready(function () {
 
                 setTimeout(function () {
                     location.reload();
-                }, 3000);
+                }, 1000);
             },
             error: function (xhr, status, error) {
                 if (xhr.status == 422) {
@@ -609,7 +609,7 @@ $(document).ready(function () {
                                 toastr.success(response.success);
                                 setTimeout(function () {
                                     location.reload();
-                                }, 3000);
+                                }, 1000);
                             },
                             error: function (response) {
                                 toastr.error(response.responseJSON.error);

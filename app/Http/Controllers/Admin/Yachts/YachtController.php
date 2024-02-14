@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\ElectronicSystems;
 use App\Http\Controllers\Controller;
+use App\Models\SelectTechnicalSpecification;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use App\Models\TechnicalSpecification;
@@ -43,7 +44,8 @@ class YachtController extends Controller
         $yachtTypes = YachtTypes::all();
         $electronicSystems = ElectronicSystems::all();
         $specifications = TechnicalSpecification::all();
-        return view('admin.yachts.create', compact('electronicSystems', 'specifications', 'yachtTypes'));
+        $selected_specifications = SelectTechnicalSpecification::all();
+        return view('admin.yachts.create', compact('electronicSystems', 'specifications', 'yachtTypes','selected_specifications'));
     }
 
     public function store(Request $request)
@@ -55,6 +57,9 @@ class YachtController extends Controller
             'country' => 'required',
             'price' => 'required',
             'currency' => 'required',
+            'banner_image' => 'required',
+            'thumbnail_image' => 'required',
+            'slider_images' => 'required',
             'description' => 'required',
             'is_recommended' => 'required',
         ];
@@ -65,6 +70,9 @@ class YachtController extends Controller
             'yacht_type_id.required' => 'Tekne tipini belirleyiniz.',
             'country.required' => 'Teknenin hangi ülkede olduğunu belirtiniz.',
             'price.required' => 'Teknenin fiyatı boş olamaz.',
+            'banner_image.required' => 'Bir arka plan resmi seçiniz.',
+            'thumbnail_image.required' => 'Bir thumbnail resmi seçiniz.',
+            'slider_images.required' => 'Teknenin resimlerini seçiniz.',
             'description.required' => 'Açıklama alanı boş bırakılamaz.',
             'is_recommended.required' => 'Önerilen alanı boş bırakılamaz.',
         ];
@@ -80,7 +88,7 @@ class YachtController extends Controller
         $yacht->seo_title = Str::slug($request->title);
         $yacht->yacht_type_id = $request->yacht_type_id;
         $yacht->trading_status = $request->trading_status;
-        $yacht->country = $request->country;
+        $yacht->country = ucwords($request->country);
         $yacht->price = $request->price;
         $yacht->currency = $request->currency;
         $yacht->description = $request->description;
@@ -193,7 +201,8 @@ class YachtController extends Controller
         $yachtTypes = YachtTypes::all();
         $electronicSystems = ElectronicSystems::all();
         $specifications = TechnicalSpecification::all();
-        return view('admin.yachts.edit', compact('yacht', 'yachtTypes', 'electronicSystems', 'specifications'));
+        $selected_specifications = SelectTechnicalSpecification::all();
+        return view('admin.yachts.edit', compact('yacht', 'yachtTypes', 'electronicSystems', 'specifications','selected_specifications'));
     }
 
     public function edit(Request $request, $id)
@@ -229,7 +238,7 @@ class YachtController extends Controller
         $yacht->seo_title = Str::slug($request->title);
         $yacht->yacht_type_id = $request->yacht_type_id;
         $yacht->trading_status = $request->trading_status;
-        $yacht->country = $request->country;
+        $yacht->country = ucwords($request->country);
         $yacht->price = $request->price;
         $yacht->currency = $request->currency;
         $yacht->description = $request->description;

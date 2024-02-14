@@ -27,7 +27,7 @@ class YachtPageController extends Controller
         $pages = Page::where('status', 1)->get();
         $yachtTypes = YachtTypes::all();
         $electronicSystems = ElectronicSystems::where('status', 1)->get();
-        $selectedSpecifications = YachtTechincalSpecifications::whereIn('specification_id', [4, 5, 6, 7])->get();
+        $selectedSpecifications = YachtTechincalSpecifications::whereIn('specification_id', [7, 1, 9, 5])->get();
         $yachtCountsByType = Yacht::select('yacht_type_id', DB::raw('count(*) as count'))
             ->with('yachtType:id,type_name') // Yat tipi adını ekleyin
             ->groupBy('yacht_type_id')
@@ -72,7 +72,7 @@ class YachtPageController extends Controller
         $yachtImages = YachtImages::where('yacht_id', $yacht->id)->get();
         $electronicSystems = YachtElectronicSystems::where('yacht_id', $yacht->id)->get();
         $recommendedYachts = Yacht::where('is_recommended', 1)->limit(3)->get();
-        $selectedSpecifications = YachtTechincalSpecifications::whereIn('specification_id', [4, 5, 6, 7])->get();
+        $selectedSpecifications = YachtTechincalSpecifications::whereIn('specification_id', [7, 1, 9, 5])->get();
         $yacht->increment('view');
         return view('frontend.pages.yacht', compact('yacht', 'user', 'pages', 'technicalSpecifications', 'yachtImages', 'electronicSystems', 'recommendedYachts', 'selectedSpecifications'));
     }
@@ -119,7 +119,7 @@ class YachtPageController extends Controller
             })->orderBy('id', 'desc');
         }
 
-        $yachts = $yachtQuery->orderBy('id', 'desc')->paginate(10);
+        $yachts = $yachtQuery->where('status',1)->orderBy('id', 'desc')->paginate(10);
 
 
 
@@ -128,7 +128,7 @@ class YachtPageController extends Controller
         $pages = Page::where('status', 1)->get();
         $yachtTypes = YachtTypes::all();
         $electronicSystems = ElectronicSystems::where('status', 1)->get();
-        $selectedSpecifications = YachtTechincalSpecifications::whereIn('specification_id', [4, 5, 6, 7])->get();
+        $selectedSpecifications = YachtTechincalSpecifications::whereIn('specification_id', [7, 1, 9, 5])->get();
         $tradingStatus = $request->trading_status;
 
         return view('frontend.pages.yachts', compact('yachts', 'banner_image', 'user', 'pages', 'selectedSpecifications', 'tradingStatus', 'yachtTypes', 'electronicSystems'));
