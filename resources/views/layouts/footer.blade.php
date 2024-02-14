@@ -19,7 +19,8 @@
 
 <!-- Bootstrap core JavaScript-->
 <script src="{{ asset('backend/vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<script src="{{asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
 <!-- Core plugin JavaScript-->
 <script src="{{ asset('backend/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
@@ -40,6 +41,7 @@
 <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 
 <script src="{{asset('backend/js/script.js')}}"></script>
+
 </body>
 
 </html>

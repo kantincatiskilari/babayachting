@@ -172,9 +172,17 @@ $(document).ready(function () {
                     window.location.href = response.redirect;
                 }
             },
-            error: function (error) {
-                toastr.error("Bir hata oluştu.");
-                console.error(error);
+            error: function (response) {
+                if (response.responseJSON && response.responseJSON.error) {
+                    $.each(
+                        response.responseJSON.error,
+                        function (index, value) {
+                            toastr.error(value);
+                        }
+                    );
+                } else {
+                    toastr.error("Bir hata oluştu. Lütfen tekrar deneyin.");
+                }
             },
         });
     }
@@ -410,14 +418,23 @@ $(document).ready(function () {
                 electronic_name: electronicName,
             },
             success: function (response) {
-
                 toastr.success(response.success);
 
                 setTimeout(function () {
                     location.reload();
                 }, 3000);
             },
-            error: function () {},
+            error: function (xhr, status, error) {
+                if (xhr.status == 422) {
+                    var errorMessage = xhr.responseJSON.error; // Hata mesajını al
+                    toastr.error(errorMessage); // Hata mesajını kullanıcıya göster
+                } else {
+                    // Diğer durumlar için
+                    toastr.error(
+                        "Sunucudan bir hata oluştu: " + xhr.responseText
+                    );
+                }
+            },
         });
     }
 });
@@ -457,9 +474,17 @@ $(document).ready(function () {
                     window.location.href = response.redirect;
                 }
             },
-            error: function (error) {
-                toastr.error("Bir hata oluştu.");
-                console.error(error);
+            error: function (response) {
+                if (response.responseJSON && response.responseJSON.error) {
+                    $.each(
+                        response.responseJSON.error,
+                        function (index, value) {
+                            toastr.error(value);
+                        }
+                    );
+                } else {
+                    toastr.error("Bir hata oluştu. Lütfen tekrar deneyin.");
+                }
             },
         });
     }
@@ -493,7 +518,7 @@ $(document).ready(function () {
                 toastr.success(response.success);
                 setTimeout(function () {
                     location.reload();
-                }, 3000);
+                }, 1000);
 
                 // Sunucu tarafında yapılan yönlendirme işlemi
                 if (response.redirect) {
@@ -507,6 +532,55 @@ $(document).ready(function () {
         });
     }
 });
+
+
+$(document).ready(function () {
+    // SEO butonlarına click event handler'ları ekleme
+    $("#seoAboutButton, #seoHomepageButton, #seoYachtsButton, #seoFaqButton, #seoContactButton").click(function (e) {
+        e.preventDefault();
+        // meta_description alanının değerini al
+        let meta_description = $("#meta_description").val();
+        let page_title = $("#page_title").val();
+
+        // Tıklanan butona göre ilgili AJAX işlemini yap
+        if ($(this).attr('id') === 'seoAboutButton') {
+            updateSeo('/admin/hakkimizda-seo/ekle', page_title, meta_description);
+        } else if ($(this).attr('id') === 'seoHomepageButton') {
+            updateSeo('/admin/anasayfa-seo/ekle', page_title, meta_description);
+        } else if ($(this).attr('id') === 'seoYachtsButton') {
+            updateSeo('/admin/tekneler-seo/ekle', page_title, meta_description);
+        } else if ($(this).attr('id') === 'seoFaqButton') {
+            updateSeo('/admin/sss-seo/ekle', page_title, meta_description);
+        } else if ($(this).attr('id') === 'seoContactButton') {
+            updateSeo('/admin/iletisim-seo/ekle', page_title, meta_description);
+        }
+    });
+
+    // SEO bilgilerini güncellemek için genel bir fonksiyon
+    function updateSeo(endpoint,page_title, meta_description) {
+        var csrfToken = $('meta[name="csrf-token"]').attr("content");
+
+        $.ajax({
+            url: endpoint,
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": csrfToken,
+            },
+            data: {
+                meta_description: meta_description,
+                page_title: page_title
+            },
+            success: function (response) {
+                toastr.success(response.success);
+                setTimeout(function () {
+                    location.reload();
+                }, 1000);
+            },
+            error: function () {},
+        });
+    }
+});
+
 
 //Delete
 $(document).ready(function () {
@@ -567,5 +641,4 @@ $(document).ready(function () {
     bindDeleteEvent(".deleteYachtBtn", "/admin/tekne-sil/");
     bindDeleteEvent(".deleteFaqBtn", "/admin/s.s.s-sil/");
     bindDeleteEvent(".deleteContactBtn", "/admin/iletisim-sil/");
-
 });

@@ -86,7 +86,7 @@
                 <div class="col-lg-8 col-12">
                     <div class="col-12 d-lg-flex d-none justify-content-between align-items-center border p-3 mb-3">
                         <div class="view d-flex gap-3">
-                            <div class="border-end px-3" id="gridBtn">
+                            <div class="border-end px-3" style="display: flex; align-items:center" id="gridBtn">
                                 <i class="fas fa-table-cells-large" style="font-size: 22px; cursor:pointer"></i>
                             </div>
                             <div style="font-size: 22px; cursor:pointer" id="listBtn">
@@ -138,7 +138,7 @@
                                             </div>
                                             <div class="yacht-info">
                                                 <div class="article-body">
-                                                    <h2 class="text-center">{{ $yacht->title }}</h2>
+                                                    <h2 class="yacht_title text-center">{{ $yacht->title }}</h2>
                                                     <div class="card-body">
                                                         @foreach ($selectedSpecifications as $specification)
                                                             @if ($specification->yacht_id == $yacht->id)
@@ -201,6 +201,7 @@
                     $(".yachts").addClass("col-lg-6");
                     $(".article-wrapper").removeClass("d-flex");
                     $(".yacht-info").removeClass('col-6');
+                    $(".yacht_title").addClass('text-center')
 
                 }
                 // Eğer listBtn tıklanırsa, list ile ilgili işlemleri yap
@@ -208,6 +209,7 @@
                     $(".yachts").removeClass("col-lg-6");
                     $(".article-wrapper").addClass("d-flex");
                     $(".yacht-info").addClass('col-6');
+                    $(".yacht_title").removeClass('text-center')
                 }
             });
         });

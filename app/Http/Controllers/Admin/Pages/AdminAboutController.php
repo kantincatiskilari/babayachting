@@ -12,7 +12,7 @@ class AdminAboutController extends Controller
     public function index()
     {
         $about = About::first() ?? "";
-   
+
         return view('admin.pages.about',compact('about'));
     }
 

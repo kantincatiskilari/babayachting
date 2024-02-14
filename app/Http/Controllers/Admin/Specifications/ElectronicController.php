@@ -66,35 +66,35 @@ class ElectronicController extends Controller
 
     public function edit(Request $request)
     {
-
-        $electronicName = ucwords(strtolower($request->electronic_name));
-
-
+        // Gelen isteği doğrula
         $request->validate([
             'electronic_name' => 'required|unique:electronic_systems,electronic_name',
         ]);
 
+        // Elektronik sistem adını düzelt
+        $electronicName = ucwords(strtolower($request->electronic_name));
+
+        // Elektronik sistem adının mevcut olup olmadığını kontrol et
         $existingType = ElectronicSystems::where('electronic_name', $electronicName)->first();
-
         if ($existingType) {
-            session()->flash('toastr', [
-                'type'    => 'error',
-                'message' => 'Bu özellik zaten mevcut.',
-            ]);
-
-            return redirect()->back();
+            // Elektronik sistem adı mevcutsa ve aynı zamanda doğrulama hatası oluşmuşsa,
+            // hem mevcutluğu hem de doğrulama hatasını kullanıcıya bildir
+            return response()->json([
+                'error' => ['Elektronik sistem adı zaten mevcut.'],
+            ], 422);
         }
 
+        // Elektronik sistem kaydını bul
         $electronicSystem = ElectronicSystems::find($request->id);
-
         if ($electronicSystem) {
             // Bulunan tip varsa, güncelleme işlemini gerçekleştir
             $electronicSystem->electronic_name = $electronicName;
             $electronicSystem->save();
         }
 
+        // Başarılı yanıtı döndür
         return response()->json([
-            'success' => 'Başarı ile güncellendi',
+            'success' => 'Başarıyla güncellendi.',
         ]);
     }
 
@@ -114,5 +114,4 @@ class ElectronicController extends Controller
             ]);
         };
     }
-
 }

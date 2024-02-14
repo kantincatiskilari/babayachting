@@ -119,6 +119,14 @@ class GeneralSettingsController extends Controller
             $generalSettings->entrance_image = $imageName;
         }
 
-        $generalSettings->save();
+        if ($generalSettings->save()) {
+            return response()->json([
+                'success' => 'Başarı ile güncellendi.',
+            ]);
+        } else {
+            return response()->json([
+                'error' => 'Bir hata meydana geldi.',
+            ]);
+        }
     }
 }

@@ -36,15 +36,15 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li
-                class="nav-item {{ Route::is('admin.tekneler') | Route::is('admin.tekne-turleri') | Route::is('admin.teknik-ozellikler') | Route::is('admin.elektronik-sistemler') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                class="nav-item {{ Route::is('admin.tekneler') || Route::is('admin.tekne-turleri') || Route::is('admin.teknik-ozellikler') || Route::is('admin.elektronik-sistemler') ? 'active' : '' }}">
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-ship"></i>
                     <span>Tekne</span>
                 </a>
-                <div id="collapseTwo"
-                    class="collapse {{ Route::is('admin.tekneler') | Route::is('admin.tekne-turleri') | Route::is('admin.teknik-ozellikler') | Route::is('admin.elektronik-sistemler') ? 'show' : '' }} "
-                    aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseOne"
+                    class="collapse {{ Route::is('admin.tekneler') || Route::is('admin.tekne-turleri') || Route::is('admin.teknik-ozellikler') || Route::is('admin.elektronik-sistemler') ? 'show' : '' }} "
+                    aria-labelledby="headingTwo" data-bs-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item {{ Route::is('admin.tekneler') ? 'active' : '' }}"
                             href="{{ route('admin.tekneler') }}">Tekneler</a>
@@ -58,10 +58,15 @@
                 </div>
             </li>
 
+
+
+
+
             <!-- Nav Item - Utilities Collapse Menu -->
+
             <li
                 class="nav-item {{ Route::is('admin.genel-ayarlar') | Route::is('admin.banner-resimleri') | Route::is('admin.sayfalar') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Ayarlar</span>
@@ -81,7 +86,7 @@
             </li>
             <li
                 class="nav-item {{ Route::is('admin.hakkimizda') | Route::is('admin.s.s.s') | Route::is('admin.kullanim-sartlari') | Route::is('admin.gizlilik-ve-politika') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-globe"></i>
                     <span>Sayfalar</span>
@@ -105,7 +110,7 @@
 
             <li
                 class="nav-item {{ Route::is('admin.anasayfa-seo') | Route::is('admin.tekneler-seo') | Route::is('admin.sss-seo') | Route::is('admin.hakkimizda-seo') | Route::is('admin.iletisim-seo') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSEO"
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSEO"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fab fa-searchengin"></i>
                     <span>SEO Ayarları</span>
@@ -129,6 +134,8 @@
 
                 </div>
             </li>
+
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -197,12 +204,16 @@
 
 
 
+
+
                         <div class="topbar-divider d-none d-sm-block"></div>
+
+
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
                                     class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle"

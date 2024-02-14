@@ -15,9 +15,8 @@
                     </div>
                     <div class="card-body">
 
-                        <form action="{{ route('admin.genel-ayarlar-guncelle') }}" method="POST"
-                            enctype="multipart/form-data">
-                            @csrf
+                        <form
+                            enctype="multipart/form-data" method="post" id="settingsForm">
                             <div class="form-group">
                                 <label for="">Anlık Header Logo</label>
                                 <div>@if ($generalSettings->header_logo)
@@ -125,7 +124,7 @@
                                 <div><input type="file" name="entrance_image" class="form-control"></div>
                             </div>
 
-                            <button type="submit" class="btn btn-success">Güncelle</button>
+                            <button type="submit" class="btn btn-success" id="updateGeneralSettingsButton">Güncelle</button>
                         </form>
                     </div>
                 </div>

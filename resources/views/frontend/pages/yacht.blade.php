@@ -102,7 +102,7 @@
                     <section class="articles">
                         <h3 class="text-center suggestion-title" style="color: rgb(16, 2, 66)">TAVSİYE ETTİKLERİMİZ</h3>
                         @foreach ($recommendedYachts as $recent_yacht)
-                            <article>
+                            <article style="border: 1px solid rgb(187, 186, 186)">
                                 <div class="article-wrapper position-relative">
                                     <figure>
                                         <img src="{{ asset('images/custom-images/') . '/' . $recent_yacht->thumbnail_image }}"
@@ -148,7 +148,7 @@
 @endsection
 
 @section('javascript')
-    
+
     <script>
         $(document).ready(function() {
             $('.slider').slick({

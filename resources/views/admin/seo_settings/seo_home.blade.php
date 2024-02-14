@@ -14,18 +14,17 @@
                     </div>
                     <div class="card-body">
 
-                        <form action="{{route('admin.anasayfa-seo/ekle')}}" method="POST">
-                            @csrf
+                        <form method="POST">
                             <div class="form-group">
                                 <label for="">Başlık</label>
-                                <input type="text" name="page_title" class="form-control"
+                                <input type="text" name="page_title" id="page_title" class="form-control"
                                     value="{{$seo_text->page_title}}">
                             </div>
                             <div class="form-group">
                                 <label for="meta_description">Site açıklaması</label>
                                 <textarea name="meta_description" id="meta_description" cols="30" rows="5" class="form-control">{{$seo_text->meta_description}}</textarea>
                             </div>
-                            <button type="submit" class="btn btn-success"> Güncelle</button>
+                            <button type="submit" class="btn btn-success" id="seoHomepageButton"> Güncelle</button>
                         </form>
                     </div>
                 </div>

@@ -13,13 +13,15 @@ use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use App\Models\TechnicalSpecification;
 use App\Models\YachtElectronicSystems;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 use App\Models\YachtTechincalSpecifications;
 
 class YachtController extends Controller
 {
     public function index()
     {
-        $yachts = Yacht::orderBy('created_at','desc')->get();
+        $yachts = Yacht::orderBy('created_at', 'desc')->get();
         return view('admin.yachts.index', compact('yachts'));
     }
 
@@ -67,7 +69,11 @@ class YachtController extends Controller
             'is_recommended.required' => 'Önerilen alanı boş bırakılamaz.',
         ];
 
-        $this->validate($request, $rules, $customMessages);
+        $validator = Validator::make($request->all(), $rules, $customMessages);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->all()], 422);
+        }
 
         $yacht = new Yacht;
         $yacht->title = $request->title;
@@ -178,8 +184,7 @@ class YachtController extends Controller
         }
 
 
-
-        return response()->json(['success' => 'Yat başarıyla eklendi.', 'redirect' => route('admin.tekneler')]);
+        return Response::json(['success' => 'Yat başarıyla eklendi.', 'redirect' => route('admin.tekneler')]);
     }
 
     public function update($id)
@@ -214,7 +219,11 @@ class YachtController extends Controller
             'is_recommended.required' => 'Önerilen alanı boş bırakılamaz.',
         ];
 
-        $this->validate($request, $rules, $customMessages);
+        $validator = Validator::make($request->all(), $rules, $customMessages);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->all()], 422);
+        }
 
         $yacht->title = $request->title;
         $yacht->seo_title = Str::slug($request->title);
